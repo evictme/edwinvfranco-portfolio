@@ -1,0 +1,29 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f1115;
+  color: #fff;
+}
+
+.hero {
+  padding: 4rem;
+  text-align: center;
+  background: #151922;
+}
+
+.actions a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+section {
+  padding: 2rem;
+}
+
+.card {
+  background: #1a1f2b;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
