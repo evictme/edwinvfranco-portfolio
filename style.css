@@ -2,28 +2,90 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background: #0f1115;
-  color: #fff;
+  color: #f5f7fa;
+}
+
+.container {
+  width: min(1100px, 92%);
+  margin: 0 auto;
 }
 
 .hero {
-  padding: 4rem;
+  padding: 5rem 0;
   text-align: center;
-  background: #151922;
+  background: linear-gradient(180deg, #151922 0%, #0f1115 100%);
 }
 
-.actions a {
-  margin: 0 10px;
+.eyebrow {
+  color: #8da2c0;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.intro {
+  max-width: 700px;
+  margin: 1rem auto 2rem;
+}
+
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.2rem;
+  background: white;
+  color: black;
+  border-radius: 8px;
   text-decoration: none;
-  color: #fff;
 }
 
-section {
-  padding: 2rem;
+.btn-secondary {
+  background: transparent;
+  border: 1px solid #444;
+  color: white;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 .card {
-  background: #1a1f2b;
-  padding: 1rem;
-  margin: 1rem 0;
-  border-radius: 8px;
+  background: #171c26;
+  padding: 1.5rem;
+  border-radius: 12px;
+}
+
+.tech {
+  font-size: 0.85rem;
+  color: #8da2c0;
+}
+
+.card-links a {
+  margin-right: 10px;
+  color: #fff;
+}
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.impact li {
+  margin-bottom: 0.5rem;
+}
+
+.contact a {
+  color: #fff;
 }
