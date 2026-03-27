@@ -506,7 +506,12 @@ p {
   margin-bottom: 10px;
   opacity: 0.92;
 }
-
+.project-image.logo {
+  width: 70px;   /* adjust this */
+  height: auto;
+  margin: 0 auto 12px;
+  display: block;
+}
 .project-video {
   object-fit: cover;
   max-height: 420px;
