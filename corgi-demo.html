@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Corgi Workflow Demo | Edwin Victor Franco</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
+  <link rel="apple-touch-icon" href="assets/favicon-512.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .demo-shell {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .demo-hero-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .demo-hero-title i {
+      font-size: 1.2rem;
+      color: var(--accent-2);
+    }
+
+    .demo-subtitle {
+      max-width: 780px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .demo-actions {
+      margin-top: 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .demo-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .demo-grid.two-col {
+      grid-template-columns: 1fr;
+    }
+
+    .mini-label {
+      display: block;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .demo-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .demo-form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .field-group {
+      display: grid;
+      gap: 6px;
+    }
+
+    .field-group label {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .field-group input,
+    .field-group select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+    rgba(255,255,255,0.03);
+  color: var(--text);
+}
+
+.field-group select option {
+  background: #161b24;
+  color: #f4f6f8;
+}
+
+.field-group select:focus {
+  color: var(--text);
+}
+
+.field-group input::placeholder,
+.field-group textarea::placeholder {
+  color: rgba(244, 246, 248, 0.45);
+}
+    .field-group textarea {
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    }
+
+    .field-group input:focus,
+    .field-group select:focus,
+    .field-group textarea:focus {
+      border-color: rgba(90, 60, 255, 0.26);
+      box-shadow:
+        0 0 10px rgba(90, 60, 255, 0.08),
+        0 0 14px rgba(0, 194, 255, 0.05);
+    }
+
+    .field-group textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    .workflow-steps {
+      display: grid;
+      gap: 10px;
+    }
+
+    .workflow-step {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .workflow-step-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .workflow-step-left i {
+      color: var(--accent-2);
+      font-size: 0.95rem;
+    }
+
+    .workflow-step-title {
+      font-weight: 600;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .status-complete {
+      color: #d7e7d8;
+      background: rgba(85, 160, 120, 0.14);
+      border-color: rgba(85, 160, 120, 0.24);
+    }
+
+    .status-active {
+      color: #f4f6f8;
+      background: rgba(90, 60, 255, 0.16);
+      border-color: rgba(90, 60, 255, 0.28);
+      box-shadow:
+        0 0 10px rgba(90, 60, 255, 0.08),
+        0 0 14px rgba(0, 194, 255, 0.05);
+    }
+
+    .status-pending {
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+      position: relative;
+    }
+
+    .timeline-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 14px;
+      padding-left: 2px;
+    }
+
+    .timeline-time {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+
+    .timeline-content {
+      position: relative;
+      padding: 0 0 0 18px;
+    }
+
+    .timeline-content::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--sg-purple), var(--sg-blue));
+      box-shadow:
+        0 0 10px rgba(90, 60, 255, 0.14),
+        0 0 12px rgba(0, 194, 255, 0.08);
+    }
+
+    .timeline-content::after {
+      content: "";
+      position: absolute;
+      left: 3.5px;
+      top: 18px;
+      bottom: -18px;
+      width: 1px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .timeline-item:last-child .timeline-content::after {
+      display: none;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .timeline-note {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .exception-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .exception-item {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .exception-main {
+      min-width: 0;
+    }
+
+    .exception-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .exception-copy {
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.55;
+    }
+
+    .queue-pill {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+    }
+
+    .queue-alert {
+      color: #f0d7c0;
+      background: rgba(180, 110, 60, 0.14);
+      border-color: rgba(180, 110, 60, 0.24);
+    }
+
+    .queue-review {
+      color: #e8e2c9;
+      background: rgba(200, 176, 122, 0.12);
+      border-color: rgba(200, 176, 122, 0.24);
+    }
+
+    .queue-pending {
+      color: #dfe3f8;
+      background: rgba(90, 60, 255, 0.12);
+      border-color: rgba(90, 60, 255, 0.22);
+    }
+
+    .design-notes {
+      display: grid;
+      gap: 12px;
+    }
+
+    .design-notes p:last-child {
+      margin-bottom: 0;
+    }
+
+    .demo-note-box {
+      padding: 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .demo-note-box strong {
+      color: var(--text);
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .back-link:hover {
+      color: var(--accent-2);
+    }
+
+    .demo-button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
+    @media (min-width: 860px) {
+      .demo-grid.two-col {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: start;
+      }
+
+      .demo-form-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .exception-item {
+  cursor: pointer;
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.exception-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(90, 60, 255, 0.18);
+  box-shadow:
+    0 0 10px rgba(90, 60, 255, 0.08),
+    0 0 14px rgba(0, 194, 255, 0.06);
+}
+
+.exception-item.resolved {
+  opacity: 0.72;
+  border-color: rgba(85, 160, 120, 0.22);
+  background: rgba(85, 160, 120, 0.06);
+}
+
+.queue-resolved {
+  color: #d7e7d8;
+  background: rgba(85, 160, 120, 0.14);
+  border-color: rgba(85, 160, 120, 0.24);
+}
+  </style>
+</head>
+<body>
+  <div class="ambient-glow ambient-glow-1"></div>
+  <div class="ambient-glow ambient-glow-2"></div>
+
+  <main class="demo-shell">
+    <a class="back-link" href="index.html">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Back to Portfolio</span>
+    </a>
+
+    <section class="panel hero-panel">
+      <div class="demo-hero-title">
+        <i class="fa-solid fa-diagram-project"></i>
+        <h1 style="margin: 0;">Corgi Workflow Demo</h1>
+      </div>
+
+      <p class="demo-subtitle">
+        A lightweight internal workflow concept for filing intake, approval routing, exception handling, and audit-ready change logging. Built to demonstrate how ambiguous, compliance-heavy operational processes can be translated into structured product systems.
+      </p>
+
+      <div class="demo-actions">
+        <a class="primary-link" href="#demo-workflow">
+          <i class="fa-solid fa-play"></i>
+          <span>View Demo</span>
+        </a>
+
+        <a class="secondary-link" href="#design-notes">
+          <i class="fa-solid fa-note-sticky"></i>
+          <span>View Source Notes</span>
+        </a>
+      </div>
+    </section>
+
+    <div id="demo-workflow" class="demo-grid two-col">
+      <section class="panel">
+        <h2>Filing Intake</h2>
+
+        <form class="demo-form">
+          <div class="demo-form-grid">
+            <div class="field-group">
+              <label for="fund-name">Fund Name</label>
+              <input id="fund-name" type="text" value="Corgi Core Markets ETF" />
+            </div>
+
+            <div class="field-group">
+              <label for="filing-type">Filing Type</label>
+              <select id="filing-type">
+                <option selected>N-PORT Update</option>
+                <option>Prospectus Update</option>
+                <option>Disclosure Review</option>
+                <option>Board Materials</option>
+              </select>
+            </div>
+
+            <div class="field-group">
+              <label for="effective-date">Effective Date</label>
+              <input id="effective-date" type="text" value="2026-04-15" />
+            </div>
+
+            <div class="field-group">
+              <label for="reviewer">Assigned Reviewer</label>
+              <select id="reviewer">
+                <option selected>Compliance Review Queue</option>
+                <option>Legal Review Queue</option>
+                <option>Operations Review Queue</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="notes">Notes / Submission Context</label>
+            <textarea id="notes">Disclosure language updated to reflect revised holdings source timing. Requires compliance review and versioned approval before final output package is marked ready.</textarea>
+          </div>
+
+          <div class="demo-actions">
+  <button type="button" class="primary-link demo-button" id="create-request-btn">
+    <i class="fa-solid fa-plus"></i>
+    <span>Create Request</span>
+  </button>
+</div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Workflow Status</h2>
+
+        <div class="workflow-step">
+  <div class="workflow-step-left">
+    <i class="fa-solid fa-inbox"></i>
+    <div class="workflow-step-title">Intake Received</div>
+  </div>
+  <div class="status-pill status-complete" id="status-intake">
+    <i class="fa-solid fa-check"></i>
+    Complete
+  </div>
+</div>
+
+<div class="workflow-step">
+  <div class="workflow-step-left">
+    <i class="fa-solid fa-list-check"></i>
+    <div class="workflow-step-title">Checklist Generated</div>
+  </div>
+  <div class="status-pill status-complete" id="status-checklist">
+    <i class="fa-solid fa-check"></i>
+    Complete
+  </div>
+</div>
+
+<div class="workflow-step">
+  <div class="workflow-step-left">
+    <i class="fa-solid fa-shield-halved"></i>
+    <div class="workflow-step-title">Compliance Review</div>
+  </div>
+  <div class="status-pill status-active" id="status-compliance">
+    <i class="fa-solid fa-hourglass-half"></i>
+    Active
+  </div>
+</div>
+
+<div class="workflow-step">
+  <div class="workflow-step-left">
+    <i class="fa-solid fa-scale-balanced"></i>
+    <div class="workflow-step-title">Legal Approval</div>
+  </div>
+  <div class="status-pill status-pending" id="status-legal">Pending</div>
+</div>
+
+<div class="workflow-step">
+  <div class="workflow-step-left">
+    <i class="fa-solid fa-file-circle-check"></i>
+    <div class="workflow-step-title">Final Ready</div>
+  </div>
+  <div class="status-pill status-pending" id="status-final">Pending</div>
+</div>
+        </div>
+      </section>
+    </div>
+
+    <section class="panel">
+      <h2>Audit Log</h2>
+
+      <div class="timeline" id="audit-log">
+        <div class="timeline-item">
+          <div class="timeline-time">10:02 AM</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Request created by Operations</div>
+            <div class="timeline-note">Initial filing request submitted with fund metadata and effective date.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10:11 AM</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Checklist generated</div>
+            <div class="timeline-note">Workflow requirements, reviewer assignment, and exception flags initialized.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10:24 AM</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Disclosure revision detected</div>
+            <div class="timeline-note">System recorded text update requiring compliance review before final publishing state.</div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-time">10:41 AM</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Review queue updated</div>
+            <div class="timeline-note">Exception surfaced for date mismatch between intake submission and source timing notes.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Exception & Review Queue</h2>
+
+      <div class="exception-list" id="exception-queue">
+        <div class="exception-item">
+          <div class="exception-main">
+            <div class="exception-title">Disclosure language requires compliance validation</div>
+            <div class="exception-copy">Change was detected after checklist generation and must be reviewed before legal approval is routed.</div>
+          </div>
+          <div class="queue-pill queue-review">Review</div>
+        </div>
+
+        <div class="exception-item">
+          <div class="exception-main">
+            <div class="exception-title">Effective date mismatch</div>
+            <div class="exception-copy">Source notes reference a timing dependency that does not yet match the filing’s current effective date.</div>
+          </div>
+          <div class="queue-pill queue-alert">Alert</div>
+        </div>
+
+        <div class="exception-item">
+          <div class="exception-main">
+            <div class="exception-title">Legal approval not yet initiated</div>
+            <div class="exception-copy">Routing remains blocked until compliance review clears the outstanding disclosure and timing issues.</div>
+          </div>
+          <div class="queue-pill queue-pending">Pending</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="design-notes" class="panel">
+      <h2>Design Notes</h2>
+
+      <div class="design-notes">
+        <div class="demo-note-box">
+          <strong>Why this concept:</strong> The goal is to show how a messy, manual workflow can be translated into a structured internal product surface that supports intake, approvals, exception handling, and auditability.
+        </div>
+
+        <div class="demo-note-box">
+          <strong>What this demonstrates:</strong> Operational workflow thinking, review-state design, change visibility, exception surfacing, and clean internal UI execution in a controlled environment.
+        </div>
+
+        <div class="demo-note-box">
+          <strong>How I’d evolve it:</strong> Versioned records, evidence capture, role-based permissions, structured approvals, export-ready outputs, queue ownership, and reconciliation states fed by upstream API or file-based inputs.
+        </div>
+      </div>
+    </section>
+  </main>
+ <script>
+  const createRequestBtn = document.getElementById("create-request-btn");
+  const fundName = document.getElementById("fund-name");
+  const filingType = document.getElementById("filing-type");
+  const effectiveDate = document.getElementById("effective-date");
+  const reviewer = document.getElementById("reviewer");
+  const notes = document.getElementById("notes");
+
+  const auditLog = document.getElementById("audit-log");
+  const exceptionQueue = document.getElementById("exception-queue");
+
+  const statusIntake = document.getElementById("status-intake");
+  const statusChecklist = document.getElementById("status-checklist");
+  const statusCompliance = document.getElementById("status-compliance");
+  const statusLegal = document.getElementById("status-legal");
+  const statusFinal = document.getElementById("status-final");
+
+  function getCurrentTimeString() {
+    const now = new Date();
+    return now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  }
+
+  function setStatus(el, type, html) {
+    el.className = `status-pill ${type}`;
+    el.innerHTML = html;
+  }
+
+  function prependAuditItem(time, title, note) {
+    const item = document.createElement("div");
+    item.className = "timeline-item";
+    item.innerHTML = `
+      <div class="timeline-time">${time}</div>
+      <div class="timeline-content">
+        <div class="timeline-title">${title}</div>
+        <div class="timeline-note">${note}</div>
+      </div>
+    `;
+    auditLog.prepend(item);
+  }
+
+  function prependException(title, copy, pillClass, pillText) {
+    const item = document.createElement("div");
+    item.className = "exception-item";
+    item.innerHTML = `
+      <div class="exception-main">
+        <div class="exception-title">${title}</div>
+        <div class="exception-copy">${copy}</div>
+      </div>
+      <div class="queue-pill ${pillClass}">${pillText}</div>
+    `;
+    addResolveBehavior(item);
+    exceptionQueue.prepend(item);
+  }
+
+  function addResolveBehavior(item) {
+    item.addEventListener("click", () => {
+      if (item.classList.contains("resolved")) return;
+
+      item.classList.add("resolved");
+
+      const pill = item.querySelector(".queue-pill");
+      const title = item.querySelector(".exception-title")?.textContent || "Queue item";
+
+      if (pill) {
+        pill.className = "queue-pill queue-resolved";
+        pill.textContent = "Resolved";
+      }
+
+      prependAuditItem(
+        getCurrentTimeString(),
+        `Queue item resolved`,
+        `${title} was marked resolved from the review queue.`
+      );
+
+      setStatus(statusCompliance, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
+    });
+  }
+
+  // Add resolve behavior to the initial queue items already on the page
+  document.querySelectorAll(".exception-item").forEach(addResolveBehavior);
+
+  createRequestBtn.addEventListener("click", () => {
+    const fund = fundName.value.trim() || "Unnamed Fund";
+    const filing = filingType.value;
+    const date = effectiveDate.value.trim() || "unspecified date";
+    const assigned = reviewer.value;
+    const noteText = notes.value.trim() || "No additional submission notes provided.";
+    const time = getCurrentTimeString();
+
+    setStatus(statusIntake, "status-complete", `<i class="fa-solid fa-check"></i> Complete`);
+    setStatus(statusChecklist, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
+    setStatus(statusCompliance, "status-pending", `Pending`);
+    setStatus(statusLegal, "status-pending", `Pending`);
+    setStatus(statusFinal, "status-pending", `Pending`);
+
+    prependAuditItem(
+      time,
+      `${filing} request created for ${fund}`,
+      `New workflow request submitted with effective date ${date} and routed to ${assigned}.`
+    );
+
+    prependAuditItem(
+      time,
+      `Submission notes captured`,
+      noteText
+    );
+
+    prependException(
+      `${filing} ready for checklist generation`,
+      `New request for ${fund} has been added and routed to ${assigned} for structured review.`,
+      "queue-review",
+      "New"
+    );
+
+    createRequestBtn.innerHTML = `
+      <i class="fa-solid fa-check"></i>
+      <span>Request Created</span>
+    `;
+
+    setTimeout(() => {
+      createRequestBtn.innerHTML = `
+        <i class="fa-solid fa-plus"></i>
+        <span>Create Request</span>
+      `;
+    }, 1800);
+  });
+</script>
+</body>
+</html>
