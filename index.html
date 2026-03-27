@@ -9,9 +9,14 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png">
   <link rel="apple-touch-icon" href="assets/favicon-512.png">
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<div class="ambient-glow ambient-glow-1"></div>
+<div class="ambient-glow ambient-glow-2"></div>
   <main class="page-shell">
     <section class="hero-panel panel">
       <div class="hero-top">
@@ -29,53 +34,93 @@
       </div>
 
       <div class="link-stack">
-  <a class="primary-link" href="#projects">View Projects</a>
-  <a class="primary-link" href="assets/Edwin_Franco_Resume.pdf" target="_blank">Download Resume</a>
-  <a class="secondary-link" href="https://github.com/evictme" target="_blank">GitHub</a>
-  <a class="secondary-link" href="https://www.linkedin.com/in/edwinvfranco" target="_blank">LinkedIn</a>
-  <a class="secondary-link" href="mailto:evf@edwinvfranco.com">evf@edwinvfranco.com</a>
+  <a class="primary-link" href="#projects">
+    <i class="fa-solid fa-diagram-project"></i>
+    <span>View Projects</span>
+  </a>
+
+  <a class="primary-link" href="assets/Edwin_Franco_Resume.pdf" target="_blank">
+    <i class="fa-solid fa-file-arrow-down"></i>
+    <span>Download Resume</span>
+  </a>
+
+  <a class="secondary-link" href="https://github.com/evictme" target="_blank">
+    <i class="fa-brands fa-github"></i>
+    <span>GitHub</span>
+  </a>
+
+  <a class="secondary-link" href="https://www.linkedin.com/in/edwinvfranco" target="_blank">
+    <i class="fa-brands fa-linkedin"></i>
+    <span>LinkedIn</span>
+  </a>
+
+  <a class="secondary-link" href="mailto:evf@edwinvfranco.com">
+    <i class="fa-solid fa-envelope"></i>
+    <span>evf@edwinvfranco.com</span>
+  </a>
 </div>
     </section>
 
     <section id="projects" class="panel">
   <h2>Featured Projects</h2>
 
-  <div class="project-card">
-    <h3>Spellgather</h3>
-    <p>
-      A full-stack web platform built for Magic: The Gathering players to manage collections, connect with nearby players, and support trading, meetups, and community interaction.
-    </p>
-    <p class="meta">
-      Firebase • JavaScript • JSON • Real-Time Systems • UI/UX Design • Web App Architecture
-    </p>
-    <ul class="impact-list">
-      <li>Designed platform structure, user flow, and interaction model</li>
-      <li>Built a scalable foundation for collection, trading, and community features</li>
-      <li>Integrated real-time systems and Firebase-based backend logic</li>
-    </ul>
-    <div class="card-actions">
-      <a href="https://www.spellgather.com" target="_blank">Live Site</a>
-      <a href="https://github.com/evictme/spellgather" target="_blank">GitHub Repo</a>
-    </div>
+<div class="project-card">
+  <img src="assets/spellgather-logo.png" alt="Spellgather Logo" class="project-image logo" />
+
+  <h3>Spellgather</h3>
+
+  <p>
+    A full-stack web platform built for Magic: The Gathering players to manage collections, connect locally, and enable trading and gameplay coordination.
+  </p>
+
+  <p class="meta">
+    Firebase • JavaScript • JSON • Real-Time Systems • UI/UX Design • Web App Architecture
+  </p>
+
+  <ul class="impact-list">
+    <li>Designed full platform architecture and interaction model</li>
+    <li>Implemented real-time backend systems using Firebase</li>
+    <li>Built scalable structure for community-driven features</li>
+  </ul>
+
+  <div class="card-actions">
+    <a href="https://www.spellgather.com" target="_blank">Live Site</a>
+    <a href="https://github.com/evictme/spellgather" target="_blank">GitHub</a>
   </div>
+</div>
 
   <div class="project-card">
-    <h3>Scribex</h3>
-    <p>
-      A custom embedded device and interface platform designed for in-game tracking, journaling, and tactile physical-digital interaction using dedicated hardware and focused UX logic.
-    </p>
-    <p class="meta">
-      ESP32 • Arduino IDE • Embedded Systems • Hardware Integration • E-Ink UI • State Logic
-    </p>
-    <ul class="impact-list">
-      <li>Designed the hardware/software interaction model from scratch</li>
-      <li>Built custom UI logic for game-state tracking and interaction flow</li>
-      <li>Integrated e-ink display, rotary input, buttons, and embedded firmware behavior</li>
-    </ul>
-    <div class="card-actions">
-      <a href="https://www.spellgather.com/scribex" target="_blank">Project Page</a>
-    </div>
+  <a href="https://youtu.be/sJtdHrLQpxk" target="_blank" class="video-preview">
+    <video class="project-image hero project-video" autoplay muted loop playsinline preload="metadata">
+      <source src="assets/scribex-loop.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="play-button">▶</div>
+  </a>
+
+  <img src="assets/scribex-logo.png" alt="Scribex Logo" class="project-image logo-inline" />
+
+  <h3>Scribex</h3>
+
+  <p>
+    A custom embedded system designed for real-world game tracking, journaling, and tactile physical-digital interaction using dedicated hardware, e-ink UI, and purpose-built firmware logic.
+  </p>
+
+  <p class="meta">
+    ESP32 • Arduino IDE • Embedded Systems • Hardware Integration • E-Ink UI • State Logic • Product Design
+  </p>
+
+  <ul class="impact-list">
+    <li>Designed the hardware/software interaction model from scratch</li>
+    <li>Built custom UI logic for game-state tracking, menu navigation, and interaction flow</li>
+    <li>Integrated display, encoder, buttons, and embedded firmware into a focused tabletop device experience</li>
+  </ul>
+
+  <div class="card-actions">
+    <a href="https://www.spellgather.com/scribex" target="_blank">Project Page</a>
+    <a href="https://youtu.be/sJtdHrLQpxk" target="_blank">Watch Demo</a>
   </div>
+</div>
 </section>
 
 <section class="panel">
@@ -92,29 +137,34 @@
     </section>
 
     <section class="panel">
-      <h2>Core Skills</h2>
-      <div class="tag-grid">
-        <span>JavaScript</span>
-        <span>HTML</span>
-        <span>SQL</span>
-        <span>JSON</span>
-        <span>Firebase</span>
-        <span>GitHub</span>
-        <span>VS Code</span>
-        <span>Arduino IDE</span>
-        <span>ESP32</span>
-        <span>UI/UX Design</span>
-        <span>Networking</span>
-        <span>VoIP / PBX</span>
-        <span>Hardware Troubleshooting</span>
-        <span>Workflow Automation</span>
-        <span>HRIS Systems</span>
-        <span>QA / Auditing</span>
-        <span>Canva</span>
-        <span>Photoshop</span>
-        <span>Procreate</span>
-      </div>
-    </section>
+  <h2>Tools & Technologies</h2>
+
+  <div class="icon-cloud">
+    <div class="tech-badge"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+    <div class="tech-badge"><i class="devicon-html5-plain"></i><span>HTML5</span></div>
+    <div class="tech-badge"><i class="devicon-css3-plain"></i><span>CSS3</span></div>
+    <div class="tech-badge"><i class="devicon-firebase-plain"></i><span>Firebase</span></div>
+    <div class="tech-badge"><i class="devicon-github-original"></i><span>GitHub</span></div>
+    <div class="tech-badge"><i class="devicon-git-plain"></i><span>Git</span></div>
+    <div class="tech-badge"><i class="devicon-vscode-plain"></i><span>VS Code</span></div>
+    <div class="tech-badge"><i class="devicon-arduino-plain"></i><span>Arduino</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-database"></i><span>SQL</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-code"></i><span>JSON</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-network-wired"></i><span>Networking</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-phone-volume"></i><span>VoIP / PBX</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-microchip"></i><span>ESP32</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-laptop-code"></i><span>Embedded Systems</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-sitemap"></i><span>Systems Design</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-gears"></i><span>Workflow Automation</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-shield-halved"></i><span>Quality Assurance</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-users-gear"></i><span>HRIS</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-chart-line"></i><span>Data Analysis</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-pen-ruler"></i><span>UI / UX</span></div>
+    <div class="tech-badge"><i class="devicon-photoshop-plain"></i><span>Photoshop</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-palette"></i><span>Canva</span></div>
+    <div class="tech-badge"><i class="fa-solid fa-pencil"></i><span>Procreate</span></div>
+  </div>
+</section>
 
     <section class="panel">
       <h2>Impact</h2>
@@ -129,11 +179,34 @@
 
    <section class="panel">
   <h2>Contact</h2>
-  <p>Email: <a href="mailto:evf@edwinvfranco.com">evf@edwinvfranco.com</a></p>
-  <p>GitHub: <a href="https://github.com/evictme" target="_blank">github.com/evictme</a></p>
-  <p>Spellgather: <a href="https://www.spellgather.com" target="_blank">www.spellgather.com</a></p>
-  <p>Scribex: <a href="https://www.spellgather.com/scribex" target="_blank">www.spellgather.com/scribex</a></p>
-  <p>LinkedIn: <a href="https://www.linkedin.com/in/edwinvfranco" target="_blank">Edwin Victor Franco</a></p>
+  <section class="panel">
+  <h2>Contact</h2>
+
+  <div class="contact-links">
+    <a href="mailto:evf@edwinvfranco.com">
+      <i class="fa-solid fa-envelope"></i>
+      <span>evf@edwinvfranco.com</span>
+    </a>
+
+    <a href="https://github.com/evictme" target="_blank">
+      <i class="fa-brands fa-github"></i>
+      <span>github.com/evictme</span>
+    </a>
+
+    <a href="https://www.linkedin.com/in/edwinvfranco" target="_blank">
+      <i class="fa-brands fa-linkedin"></i>
+      <span>LinkedIn</span>
+    </a>
+
+    <a href="https://www.spellgather.com" target="_blank">
+      <i class="fa-solid fa-globe"></i>
+      <span>www.spellgather.com</span>
+    </a>
+    <a href="https://www.spellgather.com/scribex" target="_blank">
+      <i class="fa-solid fa-globe"></i>
+      <span>www.spellgather.com/scribex</span>
+    </a>
+  </div>
 </section>
   </main>
 </body>
