@@ -21,6 +21,83 @@
       padding: 24px 0 56px;
     }
 
+    .demo-utility-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.02);
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.18),
+        0 0 12px rgba(90, 60, 255, 0.04),
+        0 0 14px rgba(0, 194, 255, 0.03);
+    }
+
+    .demo-utility-left {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .demo-utility-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #dfe5ee;
+      background: rgba(255,255,255,0.045);
+      border: 1px solid rgba(255,255,255,0.08);
+      white-space: nowrap;
+    }
+
+    .demo-utility-chip i {
+      color: var(--accent-2);
+      font-size: 0.8rem;
+    }
+
+    .demo-sample-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #d8ddff;
+      background: rgba(90, 60, 255, 0.14);
+      border: 1px solid rgba(90, 60, 255, 0.28);
+      box-shadow:
+        0 0 12px rgba(90, 60, 255, 0.08),
+        0 0 16px rgba(0, 194, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    .demo-hero-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+
+    .demo-hero-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
     .demo-hero-title {
       display: flex;
       align-items: center;
@@ -88,28 +165,36 @@
 
     .field-group input,
     .field-group select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
-    rgba(255,255,255,0.03);
-  color: var(--text);
-}
+      width: 100%;
+      padding: 12px 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.03);
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+    }
 
-.field-group select option {
-  background: #161b24;
-  color: #f4f6f8;
-}
+    .field-group select option {
+      background: #161b24;
+      color: #f4f6f8;
+    }
 
-.field-group select:focus {
-  color: var(--text);
-}
+    .field-group select:focus {
+      color: var(--text);
+    }
 
-.field-group input::placeholder,
-.field-group textarea::placeholder {
-  color: rgba(244, 246, 248, 0.45);
-}
+    .field-group input::placeholder,
+    .field-group textarea::placeholder {
+      color: rgba(244, 246, 248, 0.45);
+    }
+
     .field-group textarea {
       width: 100%;
       padding: 12px 13px;
@@ -120,6 +205,8 @@
       font: inherit;
       outline: none;
       transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+      min-height: 104px;
+      resize: vertical;
     }
 
     .field-group input:focus,
@@ -129,11 +216,6 @@
       box-shadow:
         0 0 10px rgba(90, 60, 255, 0.08),
         0 0 14px rgba(0, 194, 255, 0.05);
-    }
-
-    .field-group textarea {
-      min-height: 104px;
-      resize: vertical;
     }
 
     .workflow-steps {
@@ -280,6 +362,22 @@
       border-radius: 14px;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .exception-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(90, 60, 255, 0.18);
+      box-shadow:
+        0 0 10px rgba(90, 60, 255, 0.08),
+        0 0 14px rgba(0, 194, 255, 0.06);
+    }
+
+    .exception-item.resolved {
+      opacity: 0.72;
+      border-color: rgba(85, 160, 120, 0.22);
+      background: rgba(85, 160, 120, 0.06);
     }
 
     .exception-main {
@@ -328,6 +426,12 @@
       border-color: rgba(90, 60, 255, 0.22);
     }
 
+    .queue-resolved {
+      color: #d7e7d8;
+      background: rgba(85, 160, 120, 0.14);
+      border-color: rgba(85, 160, 120, 0.24);
+    }
+
     .design-notes {
       display: grid;
       gap: 12px;
@@ -363,10 +467,11 @@
     }
 
     .demo-button {
-  border: none;
-  cursor: pointer;
-  font: inherit;
-}
+      border: none;
+      cursor: pointer;
+      font: inherit;
+    }
+
     @media (min-width: 860px) {
       .demo-grid.two-col {
         grid-template-columns: 1.1fr 0.9fr;
@@ -378,30 +483,101 @@
       }
     }
 
-    .exception-item {
-  cursor: pointer;
-  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-}
+    @media (max-width: 720px) {
+      .demo-utility-bar,
+      .demo-hero-top {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-.exception-item:hover {
-  transform: translateY(-2px);
-  border-color: rgba(90, 60, 255, 0.18);
-  box-shadow:
-    0 0 10px rgba(90, 60, 255, 0.08),
-    0 0 14px rgba(0, 194, 255, 0.06);
-}
+      .demo-sample-badge {
+        align-self: flex-start;
+      }
+    }
 
-.exception-item.resolved {
-  opacity: 0.72;
-  border-color: rgba(85, 160, 120, 0.22);
-  background: rgba(85, 160, 120, 0.06);
-}
+        .suite-header {
+      display: grid;
+      gap: 18px;
+    }
 
-.queue-resolved {
-  color: #d7e7d8;
-  background: rgba(85, 160, 120, 0.14);
-  border-color: rgba(85, 160, 120, 0.24);
-}
+    .suite-title {
+      margin: 0 0 8px;
+      padding-bottom: 0;
+      border-bottom: none;
+      font-size: 1.5rem;
+    }
+
+    .suite-subtitle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 760px;
+    }
+
+    .suite-nav {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr;
+    }
+
+    .suite-nav-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: var(--text);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .suite-nav-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(90, 60, 255, 0.22);
+      box-shadow:
+        0 0 12px rgba(90, 60, 255, 0.08),
+        0 0 16px rgba(0, 194, 255, 0.06);
+    }
+
+    .suite-nav-card i {
+      margin-top: 2px;
+      color: var(--accent-2);
+      font-size: 1rem;
+      width: 18px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .suite-nav-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 0.98rem;
+    }
+
+    .suite-nav-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .suite-nav-card-active {
+      border-color: rgba(90, 60, 255, 0.28);
+      background:
+        linear-gradient(180deg, rgba(90,60,255,0.10), rgba(255,255,255,0.02)),
+        rgba(255,255,255,0.03);
+      box-shadow:
+        0 0 12px rgba(90, 60, 255, 0.08),
+        0 0 16px rgba(0, 194, 255, 0.05);
+    }
+
+    @media (min-width: 860px) {
+      .suite-nav {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
   </style>
 </head>
 <body>
@@ -415,14 +591,40 @@
     </a>
 
     <section class="panel hero-panel">
-      <div class="demo-hero-title">
-        <i class="fa-solid fa-diagram-project"></i>
-        <h1 style="margin: 0;">Workflow Request Demo</h1>
+      <div class="demo-utility-bar">
+        <div class="demo-utility-left">
+          <span class="demo-utility-chip">
+            <i class="fa-solid fa-flask"></i>
+            Environment: Demo
+          </span>
+          <span class="demo-utility-chip">
+            <i class="fa-solid fa-wave-square"></i>
+            Workflow State: Active
+          </span>
+          <span class="demo-utility-chip">
+            <i class="fa-solid fa-clock"></i>
+            Last Updated: Today
+          </span>
+        </div>
+
+        <div class="demo-sample-badge">
+          <i class="fa-solid fa-star"></i>
+          Product Sample
+        </div>
       </div>
 
-      <p class="demo-subtitle">
-        A lightweight internal workflow concept for filing intake, approval routing, exception handling, and audit-ready change logging. Built to demonstrate how ambiguous, compliance-heavy operational processes can be translated into structured product systems.
-      </p>
+      <div class="demo-hero-top">
+        <div class="demo-hero-copy">
+          <div class="demo-hero-title">
+            <i class="fa-solid fa-diagram-project"></i>
+            <h1 style="margin: 0;">Workflow Request Demo</h1>
+          </div>
+
+          <p class="demo-subtitle">
+            An interactive internal workflow sample for intake, review routing, exception handling, and audit-ready activity visibility. Built to show how ambiguous operational steps can be translated into a structured product surface.
+          </p>
+        </div>
+      </div>
 
       <div class="demo-actions">
         <a class="primary-link" href="#demo-workflow">
@@ -432,28 +634,64 @@
 
         <a class="secondary-link" href="#design-notes">
           <i class="fa-solid fa-note-sticky"></i>
-          <span>View Source Notes</span>
+          <span>View Design Notes</span>
         </a>
       </div>
     </section>
+<section class="panel">
+  <div class="suite-header">
+    <div class="suite-header-copy">
+      <span class="mini-label">Demo Suite</span>
+      <h2 class="suite-title">Operations Workflow Suite</h2>
+      <p class="suite-subtitle">
+        A connected set of internal product demos focused on intake, review operations, audit visibility, and decision support.
+      </p>
+    </div>
 
+    <div class="suite-nav">
+      <a class="suite-nav-card suite-nav-card-active" href="workflow-request-demo.html">
+        <i class="fa-solid fa-diagram-project"></i>
+        <div>
+          <strong>Workflow Request</strong>
+          <span>Intake, queueing, and audit log</span>
+        </div>
+      </a>
+
+      <a class="suite-nav-card" href="review-dashboard-demo.html">
+        <i class="fa-solid fa-chart-line"></i>
+        <div>
+          <strong>Review Dashboard</strong>
+          <span>Status, workload, and review visibility</span>
+        </div>
+      </a>
+
+      <a class="suite-nav-card" href="request-detail-demo.html">
+        <i class="fa-solid fa-folder-open"></i>
+        <div>
+          <strong>Request Detail</strong>
+          <span>History, approvals, and activity trail</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
     <div id="demo-workflow" class="demo-grid two-col">
       <section class="panel">
-        <h2>Filing Intake</h2>
+        <h2>Workflow Intake</h2>
 
         <form class="demo-form">
           <div class="demo-form-grid">
             <div class="field-group">
-              <label for="fund-name">Fund Name</label>
-              <input id="fund-name" type="text" value="Corgi Core Markets ETF" />
+              <label for="request-name">Request Name</label>
+              <input id="request-name" type="text" value="Sample Growth Fund" />
             </div>
 
             <div class="field-group">
-              <label for="filing-type">Filing Type</label>
-              <select id="filing-type">
-                <option selected>N-PORT Update</option>
-                <option>Prospectus Update</option>
-                <option>Disclosure Review</option>
+              <label for="request-type">Request Type</label>
+              <select id="request-type">
+                <option selected>Disclosure Update</option>
+                <option>Compliance Review</option>
+                <option>Operational Change</option>
                 <option>Board Materials</option>
               </select>
             </div>
@@ -466,78 +704,79 @@
             <div class="field-group">
               <label for="reviewer">Assigned Reviewer</label>
               <select id="reviewer">
-                <option selected>Compliance Review Queue</option>
-                <option>Legal Review Queue</option>
-                <option>Operations Review Queue</option>
+                <option selected>Operations Review Queue</option>
+                <option>Compliance Review Queue</option>
+                <option>Leadership Review Queue</option>
               </select>
             </div>
           </div>
 
           <div class="field-group">
             <label for="notes">Notes / Submission Context</label>
-            <textarea id="notes">Disclosure language updated to reflect revised holdings source timing. Requires compliance review and versioned approval before final output package is marked ready.</textarea>
+            <textarea id="notes">Submission includes updated workflow language and supporting notes. Requires structured review, approval routing, and version-aware tracking before final release.</textarea>
           </div>
 
           <div class="demo-actions">
-  <button type="button" class="primary-link demo-button" id="create-request-btn">
-    <i class="fa-solid fa-plus"></i>
-    <span>Create Request</span>
-  </button>
-</div>
+            <button type="button" class="primary-link demo-button" id="create-request-btn">
+              <i class="fa-solid fa-plus"></i>
+              <span>Create Request</span>
+            </button>
+          </div>
         </form>
       </section>
 
       <section class="panel">
         <h2>Workflow Status</h2>
 
-        <div class="workflow-step">
-  <div class="workflow-step-left">
-    <i class="fa-solid fa-inbox"></i>
-    <div class="workflow-step-title">Intake Received</div>
-  </div>
-  <div class="status-pill status-complete" id="status-intake">
-    <i class="fa-solid fa-check"></i>
-    Complete
-  </div>
-</div>
+        <div class="workflow-steps">
+          <div class="workflow-step">
+            <div class="workflow-step-left">
+              <i class="fa-solid fa-inbox"></i>
+              <div class="workflow-step-title">Intake Received</div>
+            </div>
+            <div class="status-pill status-complete" id="status-intake">
+              <i class="fa-solid fa-check"></i>
+              Complete
+            </div>
+          </div>
 
-<div class="workflow-step">
-  <div class="workflow-step-left">
-    <i class="fa-solid fa-list-check"></i>
-    <div class="workflow-step-title">Checklist Generated</div>
-  </div>
-  <div class="status-pill status-complete" id="status-checklist">
-    <i class="fa-solid fa-check"></i>
-    Complete
-  </div>
-</div>
+          <div class="workflow-step">
+            <div class="workflow-step-left">
+              <i class="fa-solid fa-list-check"></i>
+              <div class="workflow-step-title">Checklist Generated</div>
+            </div>
+            <div class="status-pill status-complete" id="status-checklist">
+              <i class="fa-solid fa-check"></i>
+              Complete
+            </div>
+          </div>
 
-<div class="workflow-step">
-  <div class="workflow-step-left">
-    <i class="fa-solid fa-shield-halved"></i>
-    <div class="workflow-step-title">Compliance Review</div>
-  </div>
-  <div class="status-pill status-active" id="status-compliance">
-    <i class="fa-solid fa-hourglass-half"></i>
-    Active
-  </div>
-</div>
+          <div class="workflow-step">
+            <div class="workflow-step-left">
+              <i class="fa-solid fa-magnifying-glass-chart"></i>
+              <div class="workflow-step-title">Structured Review</div>
+            </div>
+            <div class="status-pill status-active" id="status-review">
+              <i class="fa-solid fa-hourglass-half"></i>
+              Active
+            </div>
+          </div>
 
-<div class="workflow-step">
-  <div class="workflow-step-left">
-    <i class="fa-solid fa-scale-balanced"></i>
-    <div class="workflow-step-title">Legal Approval</div>
-  </div>
-  <div class="status-pill status-pending" id="status-legal">Pending</div>
-</div>
+          <div class="workflow-step">
+            <div class="workflow-step-left">
+              <i class="fa-solid fa-diagram-next"></i>
+              <div class="workflow-step-title">Approval Routing</div>
+            </div>
+            <div class="status-pill status-pending" id="status-routing">Pending</div>
+          </div>
 
-<div class="workflow-step">
-  <div class="workflow-step-left">
-    <i class="fa-solid fa-file-circle-check"></i>
-    <div class="workflow-step-title">Final Ready</div>
-  </div>
-  <div class="status-pill status-pending" id="status-final">Pending</div>
-</div>
+          <div class="workflow-step">
+            <div class="workflow-step-left">
+              <i class="fa-solid fa-file-circle-check"></i>
+              <div class="workflow-step-title">Final Ready</div>
+            </div>
+            <div class="status-pill status-pending" id="status-final">Pending</div>
+          </div>
         </div>
       </section>
     </div>
@@ -550,7 +789,7 @@
           <div class="timeline-time">10:02 AM</div>
           <div class="timeline-content">
             <div class="timeline-title">Request created by Operations</div>
-            <div class="timeline-note">Initial filing request submitted with fund metadata and effective date.</div>
+            <div class="timeline-note">Initial workflow request submitted with request metadata and review assignment.</div>
           </div>
         </div>
 
@@ -558,15 +797,15 @@
           <div class="timeline-time">10:11 AM</div>
           <div class="timeline-content">
             <div class="timeline-title">Checklist generated</div>
-            <div class="timeline-note">Workflow requirements, reviewer assignment, and exception flags initialized.</div>
+            <div class="timeline-note">Review requirements, status tracking, and exception flags initialized.</div>
           </div>
         </div>
 
         <div class="timeline-item">
           <div class="timeline-time">10:24 AM</div>
           <div class="timeline-content">
-            <div class="timeline-title">Disclosure revision detected</div>
-            <div class="timeline-note">System recorded text update requiring compliance review before final publishing state.</div>
+            <div class="timeline-title">Submission revision detected</div>
+            <div class="timeline-note">System recorded an updated submission requiring secondary review before final approval.</div>
           </div>
         </div>
 
@@ -574,7 +813,7 @@
           <div class="timeline-time">10:41 AM</div>
           <div class="timeline-content">
             <div class="timeline-title">Review queue updated</div>
-            <div class="timeline-note">Exception surfaced for date mismatch between intake submission and source timing notes.</div>
+            <div class="timeline-note">Exception surfaced for missing approval dependency and review routing mismatch.</div>
           </div>
         </div>
       </div>
@@ -586,24 +825,24 @@
       <div class="exception-list" id="exception-queue">
         <div class="exception-item">
           <div class="exception-main">
-            <div class="exception-title">Disclosure language requires compliance validation</div>
-            <div class="exception-copy">Change was detected after checklist generation and must be reviewed before legal approval is routed.</div>
+            <div class="exception-title">Submission requires secondary review</div>
+            <div class="exception-copy">Content changes were detected after initial checklist generation and require additional validation before final approval routing.</div>
           </div>
           <div class="queue-pill queue-review">Review</div>
         </div>
 
         <div class="exception-item">
           <div class="exception-main">
-            <div class="exception-title">Effective date mismatch</div>
-            <div class="exception-copy">Source notes reference a timing dependency that does not yet match the filing’s current effective date.</div>
+            <div class="exception-title">Approval dependency missing</div>
+            <div class="exception-copy">A required reviewer or approval checkpoint has not yet been assigned within the workflow sequence.</div>
           </div>
           <div class="queue-pill queue-alert">Alert</div>
         </div>
 
         <div class="exception-item">
           <div class="exception-main">
-            <div class="exception-title">Legal approval not yet initiated</div>
-            <div class="exception-copy">Routing remains blocked until compliance review clears the outstanding disclosure and timing issues.</div>
+            <div class="exception-title">Final approval not initiated</div>
+            <div class="exception-copy">Workflow remains blocked until review steps are completed and the approval route is confirmed.</div>
           </div>
           <div class="queue-pill queue-pending">Pending</div>
         </div>
@@ -615,145 +854,145 @@
 
       <div class="design-notes">
         <div class="demo-note-box">
-          <strong>Why this concept:</strong> The goal is to show how a messy, manual workflow can be translated into a structured internal product surface that supports intake, approvals, exception handling, and auditability.
+          <strong>Why this concept:</strong> The goal is to show how manual, high-friction workflow steps can be translated into a structured internal product surface with clearer intake, approvals, and operational visibility.
         </div>
 
         <div class="demo-note-box">
-          <strong>What this demonstrates:</strong> Operational workflow thinking, review-state design, change visibility, exception surfacing, and clean internal UI execution in a controlled environment.
+          <strong>What this demonstrates:</strong> Workflow design, review-state management, change visibility, exception handling, and clean internal UI execution in a controlled operational environment.
         </div>
 
         <div class="demo-note-box">
-          <strong>How I’d evolve it:</strong> Versioned records, evidence capture, role-based permissions, structured approvals, export-ready outputs, queue ownership, and reconciliation states fed by upstream API or file-based inputs.
+          <strong>How I’d evolve it:</strong> Add persistent data storage, role-based permissions, evidence capture, exportable activity logs, and integration with upstream APIs or file-based inputs.
         </div>
       </div>
     </section>
   </main>
- <script>
-  const createRequestBtn = document.getElementById("create-request-btn");
-  const fundName = document.getElementById("fund-name");
-  const filingType = document.getElementById("filing-type");
-  const effectiveDate = document.getElementById("effective-date");
-  const reviewer = document.getElementById("reviewer");
-  const notes = document.getElementById("notes");
 
-  const auditLog = document.getElementById("audit-log");
-  const exceptionQueue = document.getElementById("exception-queue");
+  <script>
+    const createRequestBtn = document.getElementById("create-request-btn");
+    const requestName = document.getElementById("request-name");
+    const requestType = document.getElementById("request-type");
+    const effectiveDate = document.getElementById("effective-date");
+    const reviewer = document.getElementById("reviewer");
+    const notes = document.getElementById("notes");
 
-  const statusIntake = document.getElementById("status-intake");
-  const statusChecklist = document.getElementById("status-checklist");
-  const statusCompliance = document.getElementById("status-compliance");
-  const statusLegal = document.getElementById("status-legal");
-  const statusFinal = document.getElementById("status-final");
+    const auditLog = document.getElementById("audit-log");
+    const exceptionQueue = document.getElementById("exception-queue");
 
-  function getCurrentTimeString() {
-    const now = new Date();
-    return now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
-  }
+    const statusIntake = document.getElementById("status-intake");
+    const statusChecklist = document.getElementById("status-checklist");
+    const statusReview = document.getElementById("status-review");
+    const statusRouting = document.getElementById("status-routing");
+    const statusFinal = document.getElementById("status-final");
 
-  function setStatus(el, type, html) {
-    el.className = `status-pill ${type}`;
-    el.innerHTML = html;
-  }
+    function getCurrentTimeString() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    }
 
-  function prependAuditItem(time, title, note) {
-    const item = document.createElement("div");
-    item.className = "timeline-item";
-    item.innerHTML = `
-      <div class="timeline-time">${time}</div>
-      <div class="timeline-content">
-        <div class="timeline-title">${title}</div>
-        <div class="timeline-note">${note}</div>
-      </div>
-    `;
-    auditLog.prepend(item);
-  }
+    function setStatus(el, type, html) {
+      el.className = `status-pill ${type}`;
+      el.innerHTML = html;
+    }
 
-  function prependException(title, copy, pillClass, pillText) {
-    const item = document.createElement("div");
-    item.className = "exception-item";
-    item.innerHTML = `
-      <div class="exception-main">
-        <div class="exception-title">${title}</div>
-        <div class="exception-copy">${copy}</div>
-      </div>
-      <div class="queue-pill ${pillClass}">${pillText}</div>
-    `;
-    addResolveBehavior(item);
-    exceptionQueue.prepend(item);
-  }
+    function prependAuditItem(time, title, note) {
+      const item = document.createElement("div");
+      item.className = "timeline-item";
+      item.innerHTML = `
+        <div class="timeline-time">${time}</div>
+        <div class="timeline-content">
+          <div class="timeline-title">${title}</div>
+          <div class="timeline-note">${note}</div>
+        </div>
+      `;
+      auditLog.prepend(item);
+    }
 
-  function addResolveBehavior(item) {
-    item.addEventListener("click", () => {
-      if (item.classList.contains("resolved")) return;
+    function prependException(title, copy, pillClass, pillText) {
+      const item = document.createElement("div");
+      item.className = "exception-item";
+      item.innerHTML = `
+        <div class="exception-main">
+          <div class="exception-title">${title}</div>
+          <div class="exception-copy">${copy}</div>
+        </div>
+        <div class="queue-pill ${pillClass}">${pillText}</div>
+      `;
+      addResolveBehavior(item);
+      exceptionQueue.prepend(item);
+    }
 
-      item.classList.add("resolved");
+    function addResolveBehavior(item) {
+      item.addEventListener("click", () => {
+        if (item.classList.contains("resolved")) return;
 
-      const pill = item.querySelector(".queue-pill");
-      const title = item.querySelector(".exception-title")?.textContent || "Queue item";
+        item.classList.add("resolved");
 
-      if (pill) {
-        pill.className = "queue-pill queue-resolved";
-        pill.textContent = "Resolved";
-      }
+        const pill = item.querySelector(".queue-pill");
+        const title = item.querySelector(".exception-title")?.textContent || "Queue item";
+
+        if (pill) {
+          pill.className = "queue-pill queue-resolved";
+          pill.textContent = "Resolved";
+        }
+
+        prependAuditItem(
+          getCurrentTimeString(),
+          "Queue item resolved",
+          `${title} was marked resolved from the review queue.`
+        );
+
+        setStatus(statusReview, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
+      });
+    }
+
+    document.querySelectorAll(".exception-item").forEach(addResolveBehavior);
+
+    createRequestBtn.addEventListener("click", () => {
+      const request = requestName.value.trim() || "Untitled Request";
+      const type = requestType.value;
+      const date = effectiveDate.value.trim() || "unspecified date";
+      const assigned = reviewer.value;
+      const noteText = notes.value.trim() || "No additional submission notes provided.";
+      const time = getCurrentTimeString();
+
+      setStatus(statusIntake, "status-complete", `<i class="fa-solid fa-check"></i> Complete`);
+      setStatus(statusChecklist, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
+      setStatus(statusReview, "status-pending", `Pending`);
+      setStatus(statusRouting, "status-pending", `Pending`);
+      setStatus(statusFinal, "status-pending", `Pending`);
 
       prependAuditItem(
-        getCurrentTimeString(),
-        `Queue item resolved`,
-        `${title} was marked resolved from the review queue.`
+        time,
+        `${type} request created for ${request}`,
+        `New workflow request submitted with effective date ${date} and routed to ${assigned}.`
       );
 
-      setStatus(statusCompliance, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
-    });
-  }
+      prependAuditItem(
+        time,
+        "Request notes captured",
+        noteText
+      );
 
-  // Add resolve behavior to the initial queue items already on the page
-  document.querySelectorAll(".exception-item").forEach(addResolveBehavior);
+      prependException(
+        `${type} added to review workflow`,
+        `${request} has been added to the workflow and routed to ${assigned} for structured review.`,
+        "queue-review",
+        "New"
+      );
 
-  createRequestBtn.addEventListener("click", () => {
-    const fund = fundName.value.trim() || "Unnamed Fund";
-    const filing = filingType.value;
-    const date = effectiveDate.value.trim() || "unspecified date";
-    const assigned = reviewer.value;
-    const noteText = notes.value.trim() || "No additional submission notes provided.";
-    const time = getCurrentTimeString();
-
-    setStatus(statusIntake, "status-complete", `<i class="fa-solid fa-check"></i> Complete`);
-    setStatus(statusChecklist, "status-active", `<i class="fa-solid fa-hourglass-half"></i> Active`);
-    setStatus(statusCompliance, "status-pending", `Pending`);
-    setStatus(statusLegal, "status-pending", `Pending`);
-    setStatus(statusFinal, "status-pending", `Pending`);
-
-    prependAuditItem(
-      time,
-      `${filing} request created for ${fund}`,
-      `New workflow request submitted with effective date ${date} and routed to ${assigned}.`
-    );
-
-    prependAuditItem(
-      time,
-      `Submission notes captured`,
-      noteText
-    );
-
-    prependException(
-      `${filing} ready for checklist generation`,
-      `New request for ${fund} has been added and routed to ${assigned} for structured review.`,
-      "queue-review",
-      "New"
-    );
-
-    createRequestBtn.innerHTML = `
-      <i class="fa-solid fa-check"></i>
-      <span>Request Created</span>
-    `;
-
-    setTimeout(() => {
       createRequestBtn.innerHTML = `
-        <i class="fa-solid fa-plus"></i>
-        <span>Create Request</span>
+        <i class="fa-solid fa-check"></i>
+        <span>Request Created</span>
       `;
-    }, 1800);
-  });
-</script>
+
+      setTimeout(() => {
+        createRequestBtn.innerHTML = `
+          <i class="fa-solid fa-plus"></i>
+          <span>Create Request</span>
+        `;
+      }, 1800);
+    });
+  </script>
 </body>
 </html>
