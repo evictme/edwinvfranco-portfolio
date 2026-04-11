@@ -13,6 +13,508 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
 
   <link rel="stylesheet" href="style.css" />
+
+ <style>
+  .career-preview {
+    margin: 1.75rem 0 1.25rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .career-preview-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.8rem;
+  }
+
+  .career-preview-top h2 {
+    margin: 0;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .career-preview-top a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  /* --- Visual Timeline Strip --- */
+  .career-preview-strip {
+    overflow: visible;
+    width: 100%;
+  }
+
+  .timeline-track {
+    position: relative;
+    width: 100%;
+    height: clamp(180px, 22vw, 280px);
+  }
+
+  /* Horizontal rule */
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: clamp(16px, 3vw, 50px);
+    right: clamp(16px, 3vw, 50px);
+    height: 2px;
+    background: linear-gradient(90deg,
+      rgba(255,255,255,0.06),
+      rgba(255,255,255,0.22) 6%,
+      rgba(255,255,255,0.22) 94%,
+      rgba(255,255,255,0.06));
+    transform: translateY(-1px);
+  }
+
+  /* Year tick-marks */
+  .timeline-year {
+    --pad: clamp(16px, 3vw, 50px);
+    position: absolute;
+    top: 50%;
+    left: calc(var(--pad) + var(--t) * (100% - var(--pad) * 2));
+    transform: translateX(-50%);
+    margin-top: 14px;
+    font-size: clamp(0.52rem, 0.8vw, 0.68rem);
+    opacity: 0.32;
+    pointer-events: none;
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums;
+  }
+  .timeline-year::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 3px);
+    left: 50%;
+    width: 1px;
+    height: 8px;
+    background: rgba(255,255,255,0.18);
+    transform: translateX(-50%);
+  }
+
+  /* --- Pin (each career point) --- */
+  .timeline-pin {
+    --pad: clamp(16px, 3vw, 50px);
+    position: absolute;
+    left: calc(var(--pad) + var(--t) * (100% - var(--pad) * 2));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    z-index: 1;
+    transform: translateX(-50%);
+    transition: z-index 0s 0.35s;
+  }
+  .timeline-pin:hover,
+  .timeline-pin:focus-visible {
+    z-index: 10;
+    transition: z-index 0s;
+  }
+
+  .timeline-pin.above { bottom: calc(50% + 1px); }
+  .timeline-pin.below { top: calc(50% + 1px); flex-direction: column-reverse; }
+
+  /* Dot on the line */
+  .pin-dot {
+    width: clamp(8px, 1vw, 12px);
+    height: clamp(8px, 1vw, 12px);
+    border-radius: 50%;
+    background: var(--sg-purple, #5a3cff);
+    border: 2px solid rgba(255,255,255,0.12);
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .timeline-pin:hover .pin-dot,
+  .timeline-pin:focus-visible .pin-dot {
+    transform: scale(1.4);
+    background: #7c5cff;
+    box-shadow: 0 0 12px rgba(90,60,255,0.5);
+  }
+
+  /* Stem connecting dot to chip */
+  .pin-stem {
+    width: 1px;
+    height: clamp(12px, 2vw, 22px);
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+    transition: background 0.3s ease, height 0.3s ease;
+  }
+  .timeline-pin:hover .pin-stem,
+  .timeline-pin:focus-visible .pin-stem {
+    background: rgba(90,60,255,0.35);
+    height: clamp(16px, 2.5vw, 28px);
+  }
+
+  /* Chip card */
+  .pin-chip {
+    padding: clamp(0.2rem, 0.4vw, 0.4rem) clamp(0.3rem, 0.5vw, 0.6rem);
+    border-radius: clamp(6px, 0.8vw, 10px);
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    text-align: center;
+    max-width: clamp(68px, 9vw, 115px);
+    overflow: hidden;
+    cursor: pointer;
+    transition:
+      max-width 0.35s ease,
+      padding 0.3s ease,
+      background 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+  }
+  .timeline-pin:hover .pin-chip,
+  .timeline-pin:focus-visible .pin-chip {
+    max-width: 220px;
+    padding: 0.55rem 0.85rem;
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(90,60,255,0.3);
+    box-shadow:
+      0 6px 20px rgba(0,0,0,0.35),
+      0 0 14px rgba(90,60,255,0.1),
+      0 0 20px rgba(0,194,255,0.06);
+    transform: scale(1.06);
+  }
+  .timeline-pin:focus-visible .pin-chip {
+    outline: 2px solid rgba(90,60,255,0.5);
+    outline-offset: 2px;
+  }
+
+  .pin-years {
+    display: block;
+    font-size: clamp(0.48rem, 0.65vw, 0.68rem);
+    opacity: 0.6;
+    margin-bottom: 0.1rem;
+    white-space: nowrap;
+  }
+  .pin-label {
+    display: block;
+    font-size: clamp(0.52rem, 0.72vw, 0.78rem);
+    font-weight: 600;
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .timeline-pin:hover .pin-label,
+  .timeline-pin:focus-visible .pin-label {
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .career-timeline-panel {
+    scroll-margin-top: 2rem;
+  }
+
+  .career-intro {
+    max-width: 780px;
+    margin-bottom: 1.25rem;
+  }
+
+  .career-timeline {
+    position: relative;
+    display: grid;
+    gap: 1rem;
+    padding-left: 1.2rem;
+  }
+
+  .career-timeline::before {
+    content: "";
+    position: absolute;
+    top: 0.4rem;
+    bottom: 0.4rem;
+    left: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.35), rgba(255,255,255,0.08));
+  }
+
+  .career-entry {
+    position: relative;
+    padding-left: 1rem;
+    scroll-margin-top: 1.5rem;
+  }
+
+  .career-entry::before {
+    content: "";
+    position: absolute;
+    top: 1.15rem;
+    left: -0.38rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 999px;
+    background: #fff;
+    box-shadow: 0 0 0 6px rgba(255,255,255,0.08);
+  }
+
+  .career-entry details {
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    overflow: hidden;
+  }
+
+  .career-entry summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1rem 1rem 1rem 1rem;
+  }
+
+  .career-entry summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .career-summary-grid {
+    display: grid;
+    grid-template-columns: 88px minmax(0, 1fr) auto;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .career-logo-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    color: inherit;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .career-logo-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.75rem;
+  }
+
+  .career-logo-fallback {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+    opacity: 0.8;
+  }
+
+  .career-heading {
+    min-width: 0;
+  }
+
+  .career-heading .years {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.72;
+    margin-bottom: 0.25rem;
+  }
+
+  .career-heading h3 {
+    margin: 0 0 0.2rem;
+    font-size: 1.05rem;
+    line-height: 1.25;
+  }
+
+  .career-heading p {
+    margin: 0;
+    opacity: 0.82;
+    line-height: 1.35;
+  }
+
+  .career-toggle {
+    white-space: nowrap;
+    font-size: 0.88rem;
+    font-weight: 600;
+    opacity: 0.78;
+  }
+
+  .career-hover {
+    display: none;
+    margin-top: 0.9rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+
+  .career-entry details:hover .career-hover,
+  .career-entry details:focus-within .career-hover {
+    display: grid;
+  }
+
+  .career-hover span {
+    display: block;
+    padding: 0.65rem 0.75rem;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    font-size: 0.84rem;
+    line-height: 1.3;
+  }
+
+  .career-details {
+    padding: 0 1rem 1rem 1rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .career-details p {
+    margin: 1rem 0 0.8rem;
+    line-height: 1.55;
+  }
+
+  .career-details ul {
+    margin: 0;
+    padding-left: 1.1rem;
+  }
+
+  .career-details li + li {
+    margin-top: 0.42rem;
+  }
+
+  .career-note {
+    margin-top: 1.1rem;
+    font-size: 0.88rem;
+    opacity: 0.72;
+  }
+
+  .career-entry.highlight > details {
+    animation: career-highlight 1.8s ease;
+  }
+
+  @keyframes career-highlight {
+    0% {
+      border-color: rgba(90, 60, 255, 0.5);
+      box-shadow: 0 0 20px rgba(90, 60, 255, 0.15), 0 0 30px rgba(0, 194, 255, 0.1);
+    }
+    100% {
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: none;
+    }
+  }
+
+  @media (max-width: 920px) {
+    .career-summary-grid {
+      grid-template-columns: 72px minmax(0, 1fr);
+    }
+
+    .career-toggle {
+      grid-column: 1 / -1;
+      padding-top: 0.1rem;
+    }
+
+    .career-hover {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Narrow: hide year label, show only dot/chip */
+  @media (max-width: 640px) {
+    .timeline-year { opacity: 0; font-size: 0; }
+    .timeline-year::before { display: none; }
+
+    .career-summary-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .career-logo-link {
+      width: 72px;
+      height: 72px;
+    }
+  }
+
+  /* --- Recruiter Section --- */
+  .recruiter-panel {
+    scroll-margin-top: 2rem;
+  }
+
+  .recruiter-intro {
+    max-width: 720px;
+    margin-bottom: 0.5rem;
+    line-height: 1.55;
+  }
+
+  .recruiter-label {
+    font-size: 0.84rem;
+    opacity: 0.55;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.85rem;
+  }
+
+  .resume-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .resume-card {
+    padding: 1.1rem 1.15rem;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    cursor: default;
+  }
+
+  .resume-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(90,60,255,0.3);
+    background: rgba(255,255,255,0.06);
+    box-shadow:
+      0 8px 24px rgba(0,0,0,0.3),
+      0 0 14px rgba(90,60,255,0.1),
+      0 0 18px rgba(0,194,255,0.06);
+  }
+
+  .resume-card h3 {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .resume-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    opacity: 0.78;
+    line-height: 1.45;
+    flex: 1;
+  }
+
+  .resume-card .resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 10px;
+    background: rgba(90,60,255,0.12);
+    border: 1px solid rgba(90,60,255,0.22);
+    color: inherit;
+    text-decoration: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+    width: fit-content;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .resume-card .resume-btn:hover {
+    background: rgba(90,60,255,0.22);
+    border-color: rgba(90,60,255,0.4);
+  }
+
+  @media (max-width: 920px) {
+    .resume-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .resume-grid { grid-template-columns: 1fr; }
+  }
+</style> 
 </head>
 <body>
 <div class="ambient-glow ambient-glow-1"></div>
@@ -28,20 +530,88 @@
           <p class="eyebrow">Technical Systems Builder • Product Developer • Operations Strategist</p>
           <h1>Edwin Victor Franco</h1>
           <p class="intro">
-            I build systems that connect technology, operations, and real-world workflows—turning complex problems into practical, scalable solutions.
+            Application-focused professional with hands-on experience across operations, systems, and product development. Known for diagnosing real-world issues, understanding how systems are actually used, and building practical solutions that improve workflows and reduce friction.
+
+Brings a cross-functional background spanning technical support, infrastructure, internal systems, and full-stack development, with a consistent focus on reliability, usability, and execution. Comfortable working between technical systems and non-technical users to keep operations running and solutions grounded in real needs.
           </p>
         </div>
       </div>
+<section class="career-preview" aria-label="Career timeline preview">
+  <div class="career-preview-top">
+    <h2>Career Timeline: 1993–Present</h2>
+    <a href="#career-history">View Full Employment History <i class="fa-solid fa-arrow-down"></i></a>
+  </div>
 
+  <div class="career-preview-strip" role="list" aria-label="Career timeline">
+    <div class="timeline-track">
+      <div class="timeline-line"></div>
+
+      <!-- Year tick-marks -->
+      <span class="timeline-year" style="--t:0" aria-hidden="true">1993</span>
+      <span class="timeline-year" style="--t:0.212" aria-hidden="true">2000</span>
+      <span class="timeline-year" style="--t:0.364" aria-hidden="true">2005</span>
+      <span class="timeline-year" style="--t:0.515" aria-hidden="true">2010</span>
+      <span class="timeline-year" style="--t:0.667" aria-hidden="true">2015</span>
+      <span class="timeline-year" style="--t:0.818" aria-hidden="true">2020</span>
+      <span class="timeline-year" style="--t:1" aria-hidden="true">2026</span>
+
+      <!-- Career pins — alternating above / below -->
+      <a class="timeline-pin above" href="#role-family-restaurant" role="listitem" style="--t:0">
+        <span class="pin-chip"><span class="pin-years">1993&#x2013;2002</span><span class="pin-label">Family Restaurant</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin below" href="#role-healthcare-admin" role="listitem" style="--t:0.273">
+        <span class="pin-chip"><span class="pin-years">2002&#x2013;2003</span><span class="pin-label">Alivio Medical</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin above" href="#role-heartland" role="listitem" style="--t:0.340">
+        <span class="pin-chip"><span class="pin-years">2004&#x2013;2006</span><span class="pin-label">Heartland Health</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin below" href="#role-hr-nonprofit" role="listitem" style="--t:0.424">
+        <span class="pin-chip"><span class="pin-years">2007&#x2013;2009</span><span class="pin-label">HR + Nonprofit</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin above" href="#role-hr-assistant" role="listitem" style="--t:0.545">
+        <span class="pin-chip"><span class="pin-years">2011&#x2013;2012</span><span class="pin-label">HR Assistant</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin below" href="#role-hr-director-eaa" role="listitem" style="--t:0.576">
+        <span class="pin-chip"><span class="pin-years">2012&#x2013;2016</span><span class="pin-label">HR Director</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin above" href="#role-hr-director-family" role="listitem" style="--t:0.697">
+        <span class="pin-chip"><span class="pin-years">2016&#x2013;2018</span><span class="pin-label">Family Business</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin below" href="#role-lyft" role="listitem" style="--t:0.758">
+        <span class="pin-chip"><span class="pin-years">2018&#x2013;2026</span><span class="pin-label">Lyft / Contractor</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin above" href="#role-eaa-return" role="listitem" style="--t:0.788">
+        <span class="pin-chip"><span class="pin-years">2019&#x2013;2025</span><span class="pin-label">EAA Return</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+
+      <a class="timeline-pin below" href="#role-spellgather" role="listitem" style="--t:0.970">
+        <span class="pin-chip"><span class="pin-years">2025&#x2013;Present</span><span class="pin-label">Spellgather</span></span>
+        <span class="pin-stem"></span><span class="pin-dot"></span>
+      </a>
+    </div>
+  </div>
+</section>
       <div class="link-stack">
   <a class="primary-link" href="#projects">
     <i class="fa-solid fa-diagram-project"></i>
     <span>View Projects</span>
-  </a>
-
-  <a class="primary-link" href="assets/Edwin_Victor_Franco_Resume.pdf" target="_blank">
-    <i class="fa-solid fa-file-arrow-down"></i>
-    <span>Download Resume</span>
   </a>
 
   <a class="secondary-link" href="https://github.com/evictme" target="_blank">
@@ -59,8 +629,485 @@
     <span>evf@edwinvfranco.com</span>
   </a>
   <a class="secondary-link" href="workflow-request-demo.html" target="_blank">View Workflow Demo</a>
+
+  <a class="secondary-link" href="#recruiters">
+    <i class="fa-solid fa-user-tie"></i>
+    <span>For Recruiters &#x2013; Download Resume</span>
+  </a>
 </div>
     </section>
+
+        <section id="career-history" class="panel career-timeline-panel">
+  <h2>Employment History</h2>
+  <p class="career-intro">
+    A timeline of my work from 1993 through today. Click any role to expand full details, scope, and key accomplishments.
+  </p>
+
+  <div class="career-timeline">
+
+    <!-- #1 - Family Restaurant / Early Operations -->
+    <article id="role-family-restaurant" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <!-- TODO: Replace href and img src with actual org logo/URL -->
+            <a class="career-logo-link" href="#" rel="noreferrer">
+              <span class="career-logo-fallback">FAM</span>
+            </a>
+            <div class="career-heading">
+              <span class="years">1993&#x2013;2002</span>
+              <h3>Family Restaurant &#x2014; Kitchen &amp; Operations Support</h3>
+              <p>Pilsen, Chicago. Hands-on foundation in customer service, operations, and day-to-day business reliability.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Built operational discipline in a live customer-facing business.</span>
+            <span>Learned food prep, sanitation, cleanliness, and consistency.</span>
+            <span>Gained early exposure to small business realities and customer service.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            My first long-running work environment was my family's restaurant in Pilsen. This is where I developed the habits that still define how I work: showing up consistently, staying calm under pressure, handling repetitive but important tasks, and keeping operations moving even when the environment was fast and unpredictable.
+          </p>
+          <ul>
+            <li>Supported kitchen operations, food prep, cleaning, sanitation, and front-of-house service flow.</li>
+            <li>Learned the practical side of customer service, small business operations, and teamwork under real pressure.</li>
+            <li>Built early comfort with multitasking, time-sensitive work, and hands-on problem solving.</li>
+            <li>Developed a strong baseline for reliability, follow-through, and attention to detail that carried into every role since.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #2 - Alivio Medical Center -->
+    <article id="role-healthcare-admin" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://alivio.org" rel="noreferrer" target="_blank">
+              <img src="assets/alivio.jpeg" alt="Alivio Medical Center logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">Jan 2002 &#x2013; June 2003</span>
+              <h3>Alivio Medical Center &#x2014; Lead Receptionist &#x2192; Administrative Assistant</h3>
+              <p>Patient-facing clerical work, front-office coordination, and administrative support in a community health setting.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Promoted from receptionist to lead and then administrative support.</span>
+            <span>Created training documentation for new reception staff.</span>
+            <span>Transitioned to Administrative Assistant supporting the Midwifery department.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            At Alivio Medical Center I grew quickly from front-desk clerical work into a trusted administrative role in a busy community health environment.
+          </p>
+          <ul>
+            <li>Handled patient-facing clerical work, scheduling, and front-office coordination.</li>
+            <li>Promoted to Lead Receptionist; created a receptionist guidelines booklet for training and policy consistency.</li>
+            <li>Managed petty cash, coverage scheduling, and training coordination for new staff.</li>
+            <li>Transitioned to Administrative Assistant supporting the Midwifery department&#x2014;managing schedules for midwives, OB/GYN doctors, a surgeon, and a social worker.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #3 - Heartland Health Outreach -->
+    <article id="role-heartland" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://hahealth.org/" rel="noreferrer" target="_blank">
+              <img src="assets/ha-logo.png" alt="Heartland Alliance Health logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">Dec 2004 &#x2013; Nov 2006</span>
+              <h3>Heartland Health Outreach / Heartland International Health Center &#x2014; Program Assistant III</h3>
+              <p>Executive-level administrative support, statistical reporting, grants coordination, and office operations in a mission-driven healthcare organization.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Supported the CEO, Medical Director, and senior leadership.</span>
+            <span>Tracked patient demographics for grants and government reporting.</span>
+            <span>Assisted in management-level hiring, strategy, and cross-program projects.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            Heartland Alliance advances the human rights and responds to the human needs of endangered populations&#x2014;particularly the poor, the isolated, and the displaced&#x2014;through the provision of comprehensive and respectful services and the promotion of permanent solutions leading to a more just global society.
+          </p>
+          <ul>
+            <li>Supported and reported to the CEO, Medical Director, Senior Director of Primary Care, Director of Support Services, Director of HIV Services, HIHC Managing Director, and Director of Grants Management.</li>
+            <li>Performed various administrative duties ranging from clerical assistance to statistical reporting and analysis.</li>
+            <li>Responsible for assisting the Community Health Center Board (agendas, minutes, presentations, catering, organized communication with other non-board members, etc.).</li>
+            <li>Helped in the oversight of overall office/health center work flow (inventory, coordinating meetings and space, etc.).</li>
+            <li>Tracked, managed, and reported on patient demographics for necessary grant and funding applications and government requirements, as well as internal monthly reporting.</li>
+            <li>Acted as liaison for staff and HR/Payroll.</li>
+            <li>Managed inventory and office supplies.</li>
+            <li>Made travel arrangements for program staff, when necessary.</li>
+            <li>Assisted in management-level projects: interviewing/hiring process, strategic application of protocols and policies, collaboration with other Heartland Alliance programs for the development of large-scale projects.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #4 - Human Resources + Nonprofit Administration -->
+    <article id="role-hr-nonprofit" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.casacentral.org" rel="noreferrer" target="_blank">
+              <img src="assets/casacentral.png" alt="Casa Central logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2007&#x2013;2009</span>
+              <h3>Casa Central Social Services &#x2014; Human Resources Specialist</h3>
+              <p>Recruiting, compliance, onboarding, and process improvement across a multi-program nonprofit.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Recruited qualified staff and streamlined the hiring process.</span>
+            <span>Created recruitment and hiring databases.</span>
+            <span>Coordinated all new hire processes, orientations, and compliance.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            At Casa Central, I stepped fully into a human resources role&#x2014;owning recruitment and onboarding processes across multiple social service programs. This was where I started building the operational systems thinking that would define my later career.
+          </p>
+          <ul>
+            <li>Recruited qualified staff across multiple programs and streamlined the full hiring process.</li>
+            <li>Created recruitment and hiring databases for tracking candidates and improving workflow consistency.</li>
+            <li>Coordinated all new hire processes end-to-end: interviews, paperwork, orientations, and onboarding.</li>
+            <li>Ensured employee file compliance with organizational and regulatory standards.</li>
+            <li>Collaborated on employee retention strategy and contributed to program review committee efforts.</li>
+            <li>Delivered orientations and supported in-house training for new and existing staff.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #4 - HR Assistant (EAA first stint) -->
+    <article id="role-hr-assistant" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.eaachicago.org/" rel="noreferrer" target="_blank">
+              <img src="assets/eaa.png" alt="European American Association logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2011&#x2013;2012</span>
+              <h3>European American Association &#x2014; Human Resources Assistant</h3>
+              <p>HR support and the beginning of my systems-building path&#x2014;coded the organization's first HRIS database.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Coded and implemented a custom HRIS database in MS Access and SQL.</span>
+            <span>Developed the HR department's foundational processes.</span>
+            <span>Became central to both HR operations and technical improvement work.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            EAA was the turning point in my career. I was brought in to support HR, but the organization needed someone who could digitize workflows and translate operational needs into working systems. I built the HRIS from scratch&#x2014;the first real systems work of my career.
+          </p>
+          <ul>
+            <li>Coded and implemented the organization's first HRIS database using MS Access and SQL for client and employee management.</li>
+            <li>Developed the Human Resources department's core documentation, policies, and operational foundation.</li>
+            <li>Supported HR operations, onboarding, compliance processes, and internal coordination.</li>
+            <li>Began replacing paper-heavy workflows with structured digital processes.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #5 - HR Director (EAA) -->
+    <article id="role-hr-director-eaa" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.eaachicago.org/" rel="noreferrer" target="_blank">
+              <img src="assets/eaa.png" alt="European American Association logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2012&#x2013;2016</span>
+              <h3>European American Association &#x2014; Human Resources Director</h3>
+              <p>Led HR operations, policy development, compliance, vendor negotiations, and technology projects for a home care services nonprofit.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Full ownership of recruitment, training, orientation, and compliance.</span>
+            <span>Built homecare training programs and implemented EVV systems.</span>
+            <span>Led ACA compliance research and vendor negotiations.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            Promoted to HR Director, I took full ownership of the department I had helped build. This role blended people operations with systems strategy&#x2014;covering recruitment, policy creation, regulatory compliance, technology rollouts, and cross-functional management work.
+          </p>
+          <ul>
+            <li>Managed all recruitment, training, orientation, workers' compensation, and unemployment processes.</li>
+            <li>Developed organizational policies and implemented consistent office procedures across departments.</li>
+            <li>Created the homecare training program and supported compliance for a regulated care environment.</li>
+            <li>Led the Electronic Visit Verification (EVV) implementation project.</li>
+            <li>Negotiated vendor contracts with Sprint/T-Mobile and E-Pay, reducing costs and improving service reliability.</li>
+            <li>Researched and reported on ACA impact and compliance requirements for organizational leadership.</li>
+            <li>Contributed to management team strategy and cross-departmental operational planning.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #6 - Operations & Business Management (El Sol) -->
+    <article id="role-hr-director-family" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <!-- TODO: Replace href and img src with actual org logo/URL -->
+            <a class="career-logo-link" href="#" rel="noreferrer">
+              <span class="career-logo-fallback">SOL</span>
+            </a>
+            <div class="career-heading">
+              <span class="years">2016&#x2013;2018</span>
+              <h3>El Sol de Michoacan &#x2014; Operations &amp; Business Management</h3>
+              <p>Family business operations, inventory, employee management, food safety, and day-to-day leadership.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Assisted in running a family business across multiple operational areas.</span>
+            <span>Managed employees, inventory, stocking, and compliance.</span>
+            <span>Handled food preparation, sanitation, and health inspection readiness.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            After leaving EAA, I stepped into a leadership role at my family's business. This was hands-on management work&#x2014;covering employee oversight, inventory, food operations, compliance, and daily business continuity.
+          </p>
+          <ul>
+            <li>Assisted in running the business day-to-day, including scheduling, supervision, and operational coordination.</li>
+            <li>Managed inventory, stocking, purchasing, and vendor relationships.</li>
+            <li>Oversaw employee management, coverage, and workplace expectations.</li>
+            <li>Handled check cashing operations and front-of-house customer service.</li>
+            <li>Maintained food preparation quality, sanitation standards, and inspection readiness.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #7 - Lyft Driver / Independent Contractor -->
+    <article id="role-lyft" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.lyft.com" target="_blank" rel="noreferrer">
+              <img src="assets/lyft.jpg" alt="Lyft logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2018&#x2013;2026</span>
+              <h3>Lyft &#x2014; Driver / Independent Contractor</h3>
+              <p>Independent service work requiring consistency, communication, customer handling, and operational discipline.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Maintained service quality while operating independently.</span>
+            <span>Handled customer interaction, time management, and logistics daily.</span>
+            <span>Ran in parallel with technical projects and other professional responsibilities.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            Driving for Lyft has run in parallel with my technical, product, and operational work. It kept me sharp on reliability, communication, situational judgment, and managing service quality in unpredictable real-world conditions.
+          </p>
+          <ul>
+            <li>Provided safe and professional transportation in a high-volume, customer-facing environment.</li>
+            <li>Managed independent scheduling, route logistics, and time management without direct supervision.</li>
+            <li>Maintained professional communication and adaptability across thousands of rider interactions.</li>
+            <li>Sustained consistent service quality while supporting other responsibilities and building projects in parallel.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #8 - EAA Return: HR/QA/IT/Ops -->
+    <article id="role-eaa-return" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.eaachicago.org/" rel="noreferrer" target="_blank">
+              <img src="assets/eaa.png" alt="European American Association logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2019&#x2013;2025</span>
+              <h3>European American Association &#x2014; HR Support, QA/Compliance, Operations &amp; IT</h3>
+              <p>Cross-functional owner of HRIS, operations, IT support, onboarding, compliance workflows, reporting, and systems improvement.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Ran IT, systems, workflow automation, and HR support across the organization.</span>
+            <span>Reduced internal document processing costs by roughly 80%.</span>
+            <span>Built tools that reduced workload by roughly 65% and supported continuity during COVID.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            After returning to EAA, I became the person the organization depended on to keep systems working, modernize workflows, and support day-to-day operational needs. The role blended HR generalist work, IT and quality assurance specialist duties, compliance, system design, and process strategy.
+          </p>
+          <ul>
+            <li>Maintained and continued developing the organization's custom HRIS and internal employee/client databases with sustainable data architecture.</li>
+            <li>Designed and implemented database objects, user security, and reporting frameworks.</li>
+            <li>Managed IT infrastructure: networks, VPNs, remote access, VoIP/PBX systems, VMware, cloud platforms, backups, and continuity planning.</li>
+            <li>Saved the organization significant costs by diagnosing and resolving a critical phone system issue that would have required full replacement.</li>
+            <li>Built internal tools that cut major project timelines and reduced manual workload by roughly 65%.</li>
+            <li>Reduced document processing costs by roughly 80% through paper-to-paperless workflow conversion.</li>
+            <li>Coordinated EVV workforce app deployment and vendor negotiations.</li>
+            <li>Managed onboarding/offboarding, credential provisioning, user accounts, and internal support.</li>
+            <li>Established QA standards, conducted internal audits, and maintained compliance reporting for regulatory requirements.</li>
+            <li>Helped maintain 90&#x2013;98% operational continuity during COVID through digital process redesign.</li>
+            <li>Served as technical translator between operational staff, supervisors, management, and regulatory bodies.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+    <!-- #9 - Spellgather Founder / Product Builder -->
+    <article id="role-spellgather" class="career-entry">
+      <details>
+        <summary>
+          <div class="career-summary-grid">
+            <a class="career-logo-link" href="https://www.spellgather.com" target="_blank" rel="noreferrer">
+              <img src="assets/spellgather-logo.png" alt="Spellgather logo" />
+            </a>
+            <div class="career-heading">
+              <span class="years">2025&#x2013;Present</span>
+              <h3>Spellgather &#x2014; Founder / Product Builder</h3>
+              <p>Full-stack product development, systems architecture, real-time workflows, and community-driven product design.</p>
+            </div>
+            <div class="career-toggle">Click for full details</div>
+          </div>
+
+          <div class="career-hover">
+            <span>Designed and built a full-stack platform from the ground up.</span>
+            <span>Architected real-time systems, data workflows, and community features.</span>
+            <span>Continuing to ship, iterate, and expand across web and embedded products.</span>
+          </div>
+        </summary>
+
+        <div class="career-details">
+          <p>
+            Spellgather is where my operations, product, and technical experience come together. I designed and built a full-stack web platform from the ground up&#x2014;handling architecture, real-time workflows, user-facing features, and systems design as a solo builder shipping real product.
+          </p>
+          <ul>
+            <li>Built the full product architecture, user flows, data structures, and real-time feature behavior.</li>
+            <li>Designed systems for community-driven product development, including collection management, local discovery, and trade coordination.</li>
+            <li>Worked across frontend, backend, database design, and workflow automation.</li>
+            <li>Applied practical debugging, iteration, and execution discipline to ship and maintain a live platform.</li>
+            <li>Currently expanding the ecosystem with Scribex, a purpose-built embedded companion device using ESP32 hardware and e-ink UI.</li>
+          </ul>
+        </div>
+      </details>
+    </article>
+
+  </div>
+
+  <p class="career-note">
+    <!-- TODO: Replace placeholder logo fallbacks and links above with actual organization logos and URLs as available. -->
+  </p>
+</section>
+
+    <section id="recruiters" class="panel recruiter-panel">
+  <h2>For Recruiters</h2>
+  <p class="recruiter-intro">
+    I maintain multiple tailored resumes depending on the role. Select the version that best aligns with the position you're considering me for.
+  </p>
+  <p class="recruiter-label">Choose by role focus:</p>
+
+  <div class="resume-grid">
+    <div class="resume-card">
+      <h3>Product / Full-Stack</h3>
+      <p>Full-stack product development, systems design, and AI-assisted workflows.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_R6.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>Application / Product Support</h3>
+      <p>User-focused troubleshooting, SaaS support, and workflow improvement.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_R3.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>IT Support / Systems</h3>
+      <p>Hands-on technical support, device troubleshooting, networking, and Tier 2 issue resolution.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_R4.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>Systems / Hybrid Engineer</h3>
+      <p>Systems administration, infrastructure support, and internal tools.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_R1.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>Administrative / Operations</h3>
+      <p>Office operations, coordination, documentation, and workflow support.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_ADMIN.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>Retail / Customer-Facing</h3>
+      <p>Customer service, team coordination, and operations in fast-paced environments.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_Retail.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+
+    <div class="resume-card">
+      <h3>General Resume</h3>
+      <p>Broad overview of experience across systems, operations, and product development.</p>
+      <a class="resume-btn" href="assets/Edwin_Victor_Franco_Resume.pdf" target="_blank">
+        <i class="fa-solid fa-file-arrow-down"></i> View Resume
+      </a>
+    </div>
+  </div>
+</section>
 
     <section id="projects" class="panel">
   <h2>Featured Projects</h2>
@@ -189,8 +1236,6 @@
       </ul>
     </section>
 
-   <section class="panel">
-  <h2>Contact</h2>
   <section class="panel">
   <h2>Contact</h2>
 
@@ -221,5 +1266,46 @@
   </div>
 </section>
   </main>
+  <script>
+  /* Accordion: only one career entry open at a time */
+  document.querySelectorAll('.career-entry details').forEach((item) => {
+    item.addEventListener('toggle', () => {
+      if (!item.open) return;
+      document.querySelectorAll('.career-entry details').forEach((other) => {
+        if (other !== item) other.open = false;
+      });
+    });
+  });
+
+  /* Preview pin click: scroll to role, open it, and highlight */
+  document.querySelectorAll('.timeline-pin').forEach((chip) => {
+    chip.addEventListener('click', (e) => {
+      const href = chip.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+
+      const targetId = href.substring(1);
+      const entry = document.getElementById(targetId);
+      if (!entry) return;
+
+      /* Open the matching details if closed */
+      const details = entry.querySelector('details');
+      if (details && !details.open) {
+        details.open = true;
+      }
+
+      /* Smooth scroll to the entry */
+      entry.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      /* Brief highlight effect */
+      entry.classList.remove('highlight');
+      void entry.offsetWidth; /* force reflow to restart animation */
+      entry.classList.add('highlight');
+      entry.addEventListener('animationend', () => {
+        entry.classList.remove('highlight');
+      }, { once: true });
+    });
+  });
+</script>
 </body>
 </html>
