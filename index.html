@@ -459,7 +459,6 @@
     flex-direction: column;
     gap: 0.55rem;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
-    cursor: default;
   }
 
   .resume-card:hover {
@@ -488,11 +487,12 @@
 
   .resume-btn-group {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 0.4rem;
+    margin-top: 0.1rem;
   }
 
-  .resume-card .resume-btn {
+  .resume-btn {
     display: inline-flex;
     align-items: center;
     gap: 0.4rem;
@@ -504,13 +504,22 @@
     text-decoration: none;
     font-size: 0.84rem;
     font-weight: 600;
-    width: fit-content;
     transition: background 0.2s ease, border-color 0.2s ease;
   }
 
-  .resume-card .resume-btn:hover {
+  .resume-btn:hover {
     background: rgba(90,60,255,0.22);
     border-color: rgba(90,60,255,0.4);
+  }
+
+  .resume-btn-dl {
+    background: rgba(0,194,255,0.08);
+    border-color: rgba(0,194,255,0.2);
+  }
+
+  .resume-btn-dl:hover {
+    background: rgba(0,194,255,0.16);
+    border-color: rgba(0,194,255,0.35);
   }
 
   @media (max-width: 920px) {
@@ -1057,84 +1066,91 @@ Brings a cross-functional background spanning technical support, infrastructure,
   <p class="recruiter-label">Choose by role focus:</p>
 
   <div class="resume-grid">
+
+    <!-- Admin -->
     <div class="resume-card">
-      <h3>Application &amp; Product Support</h3>
-      <p>Troubleshooting complex systems, resolving user issues, and improving application reliability through root cause analysis and workflow optimization.</p>
+      <h3>Administrative / Office Support</h3>
+      <p>Operations-focused administrative support with strong communication, organization, documentation, and reliability in fast-paced environments.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R6.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Application Support Engineer
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_ADMIN.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
         </a>
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R3.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Product Support Specialist
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_ADMIN.pdf" download="EDWIN_VICTOR_FRANCO_ADMIN.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
+    <!-- Ops -->
     <div class="resume-card">
-      <h3>IT &amp; Systems Support</h3>
-      <p>Hands-on support across hardware, software, networking, and user environments, including Tier 2 troubleshooting and system administration.</p>
+      <h3>Operations / Systems / Workflow</h3>
+      <p>Systems and operations professional experienced in workflow coordination, process improvement, execution, and cross-functional support.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R4.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> IT Support Specialist
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_OPS.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
         </a>
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R2.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Systems Support Engineer
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_OPS.pdf" download="EDWIN_VICTOR_FRANCO_OPS.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
+    <!-- Tech -->
     <div class="resume-card">
-      <h3>HRIS &amp; Operations Systems</h3>
-      <p>Designing, maintaining, and optimizing HR systems, data workflows, and internal tools to improve operational efficiency and data integrity.</p>
+      <h3>IT / Technical Support</h3>
+      <p>IT and application support specialist focused on troubleshooting, system reliability, user support, and root-cause problem solving.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R5.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> HRIS Analyst
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_TECH.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
+        </a>
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_TECH.pdf" download="EDWIN_VICTOR_FRANCO_TECH.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
+    <!-- Analyst -->
     <div class="resume-card">
-      <h3>Product Engineering &amp; Full-Stack Development</h3>
-      <p>Building and shipping full-stack applications, designing system architecture, and iterating on real-world products using modern tools and AI-assisted workflows.</p>
+      <h3>Analyst / HRIS / Reporting</h3>
+      <p>Data and operations analyst specializing in reporting, workflow optimization, data integrity, and structured process improvement.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R2.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Full-Stack Developer / Product Engineer
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_ANALYST.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
         </a>
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R1.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Hybrid Application / System Engineer
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_ANALYST.pdf" download="EDWIN_VICTOR_FRANCO_ANALYST.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
+    <!-- Dev -->
     <div class="resume-card">
-      <h3>Administrative &amp; Operations Support</h3>
-      <p>Coordinating office operations, managing workflows, handling communication, and ensuring reliable day-to-day business execution.</p>
+      <h3>Full-Stack / Product Development</h3>
+      <p>Full-stack developer experienced in building and maintaining real-world applications, workflows, and system logic.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_ADMIN.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Administrative Resume
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_DEV.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
+        </a>
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_DEV.pdf" download="EDWIN_VICTOR_FRANCO_DEV.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
+    <!-- General -->
     <div class="resume-card">
-      <h3>Retail &amp; Customer Operations</h3>
-      <p>Customer-facing roles focused on service delivery, team coordination, and maintaining efficient operations in fast-paced environments.</p>
+      <h3>General Resume</h3>
+      <p>Broad, well-rounded resume covering operations, systems, technical support, workflow improvement, and hands-on problem solving.</p>
       <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_R.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> Retail Resume
+        <a class="resume-btn" href="assets/EDWIN_VICTOR_FRANCO_RESUME.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
+        </a>
+        <a class="resume-btn resume-btn-dl" href="assets/EDWIN_VICTOR_FRANCO_RESUME.pdf" download="EDWIN_VICTOR_FRANCO_RESUME.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
         </a>
       </div>
     </div>
 
-    <div class="resume-card">
-      <h3>General Overview</h3>
-      <p>Broad overview of experience across systems, operations, product development, and technical support.</p>
-      <div class="resume-btn-group">
-        <a class="resume-btn" href="assets/Edwin_Victor_Franco_Resume.pdf" target="_blank">
-          <i class="fa-solid fa-file-arrow-down"></i> General Resume
-        </a>
-      </div>
-    </div>
   </div>
 </section>
 
