@@ -486,6 +486,329 @@ p {
   }
 }
 
+/* ─── Professional References Section ──────────────────────────────────────── */
+
+.references-panel {
+  scroll-margin-top: 2rem;
+}
+
+.references-intro {
+  max-width: 720px;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  opacity: 0.88;
+}
+
+/* Form embed container */
+.references-form-block {
+  margin-bottom: 2.5rem;
+}
+
+.references-form-block h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+  opacity: 0.7;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.references-form-block > p {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  opacity: 0.6;
+  line-height: 1.5;
+}
+
+.references-iframe-wrap {
+  position: relative;
+  width: 100%;
+  /* 480 / 640 ≈ 75% — matches the form's native aspect ratio */
+  padding-bottom: 75%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.references-iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 16px;
+}
+
+/* Display area header */
+.references-display-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.ref-count {
+  font-size: 0.84rem;
+  opacity: 0.5;
+  letter-spacing: 0.04em;
+}
+
+/* Search input */
+.ref-search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.ref-search-wrap .ref-search-icon {
+  position: absolute;
+  left: 0.7rem;
+  font-size: 0.82rem;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+#ref-search {
+  padding: 0.45rem 0.9rem 0.45rem 2rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.86rem;
+  width: 220px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+#ref-search::placeholder {
+  opacity: 0.45;
+}
+
+#ref-search:focus {
+  border-color: rgba(90, 60, 255, 0.4);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* Role group accordion */
+.ref-group {
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 14px;
+  margin-bottom: 0.6rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  transition: border-color 0.2s ease;
+}
+
+.ref-group:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.ref-group-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.ref-group-toggle:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.ref-group-toggle:focus-visible {
+  outline: 2px solid rgba(90, 60, 255, 0.6);
+  outline-offset: -2px;
+}
+
+.ref-group-title {
+  flex: 1;
+}
+
+.ref-group-count {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(90, 60, 255, 0.14);
+  border: 1px solid rgba(90, 60, 255, 0.22);
+  color: var(--text);
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.ref-group-chevron {
+  font-size: 0.78rem;
+  opacity: 0.5;
+  transition: transform 0.22s ease;
+  flex-shrink: 0;
+}
+
+.ref-group-toggle.open .ref-group-chevron {
+  transform: rotate(180deg);
+}
+
+/* Group body */
+.ref-group-body {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.6rem 0.75rem 0.75rem;
+}
+
+/* Name list */
+.ref-name-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.ref-name-item {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ref-name-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.ref-name-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(90, 60, 255, 0.25);
+}
+
+.ref-name-btn:focus-visible {
+  outline: 2px solid rgba(90, 60, 255, 0.6);
+  outline-offset: -2px;
+}
+
+.ref-name-btn i {
+  opacity: 0.55;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.ref-name-btn.open i {
+  opacity: 0.85;
+  color: rgba(90, 60, 255, 0.9);
+}
+
+.ref-name-btn span:first-of-type {
+  flex: 1;
+}
+
+.ref-name-type {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+  background: rgba(0, 194, 255, 0.08);
+  border: 1px solid rgba(0, 194, 255, 0.18);
+  opacity: 0.8;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Detail card (inside a name item) */
+.ref-detail-wrap {
+  padding: 0.5rem 0.3rem 0.3rem;
+}
+
+.ref-detail-card {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.ref-detail-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.4rem 0.75rem;
+  align-items: baseline;
+  font-size: 0.86rem;
+  line-height: 1.45;
+}
+
+.ref-detail-label {
+  font-weight: 600;
+  opacity: 0.5;
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.ref-detail-value {
+  opacity: 0.88;
+  word-break: break-word;
+}
+
+/* Empty state */
+.ref-empty {
+  font-size: 0.9rem;
+  opacity: 0.5;
+  padding: 1.25rem 0;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .references-display-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #ref-search {
+    width: 100%;
+  }
+
+  .ref-detail-row {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+  }
+
+  .ref-detail-label {
+    margin-top: 0.4rem;
+  }
+
+  .references-iframe-wrap {
+    /* Taller on small screens — form needs scroll room */
+    padding-bottom: 120%;
+  }
+}
+
 .project-image {
   width: 100%;
   border-radius: 14px;

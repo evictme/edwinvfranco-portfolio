@@ -649,6 +649,11 @@ Brings a cross-functional background spanning technical support, infrastructure,
     <i class="fa-solid fa-user-tie"></i>
     <span>For Recruiters &#x2013; Download Resume</span>
   </a>
+
+  <a class="secondary-link" href="#references">
+    <i class="fa-solid fa-comments"></i>
+    <span>Professional References</span>
+  </a>
 </div>
     </section>
 
@@ -1154,6 +1159,51 @@ Brings a cross-functional background spanning technical support, infrastructure,
   </div>
 </section>
 
+    <section id="references" class="panel references-panel">
+  <h2>Professional References</h2>
+  <p class="references-intro">
+    Colleagues, supervisors, collaborators, and personal contacts are welcome to submit a reference using the form below. Approved references are displayed on this page, grouped by the role we worked in together.
+  </p>
+
+  <!-- ── Submit a Reference ─────────────────────────────── -->
+  <div class="references-form-block">
+    <h3>Submit a Reference</h3>
+    <p>If you have worked with me in any capacity, I would appreciate your feedback. The form below takes only a few minutes to complete.</p>
+    <div class="references-iframe-wrap">
+      <iframe
+        src="https://forms.cloud.microsoft/r/NM2UkTK5kn?embed=true"
+        frameborder="0"
+        marginwidth="0"
+        marginheight="0"
+        allowfullscreen
+        webkitallowfullscreen
+        mozallowfullscreen
+        msallowfullscreen
+        title="Professional Reference Submission Form"
+        aria-label="Professional Reference Submission Form"
+      ></iframe>
+    </div>
+  </div>
+
+  <!-- ── Approved References Display ───────────────────── -->
+  <div class="references-display">
+    <div class="references-display-header">
+      <p class="ref-count" id="ref-count"></p>
+      <div class="ref-search-wrap">
+        <i class="fa-solid fa-magnifying-glass ref-search-icon" aria-hidden="true"></i>
+        <input
+          type="search"
+          id="ref-search"
+          placeholder="Filter by name or role…"
+          aria-label="Filter references by name or role"
+          autocomplete="off"
+        />
+      </div>
+    </div>
+    <div id="references-list"></div>
+  </div>
+</section>
+
     <section id="projects" class="panel">
   <h2>Featured Projects</h2>
 
@@ -1311,6 +1361,8 @@ Brings a cross-functional background spanning technical support, infrastructure,
   </div>
 </section>
   </main>
+  <script src="references-data.js"></script>
+  <script src="references.js"></script>
   <script>
   /* Accordion: only one career entry open at a time */
   document.querySelectorAll('.career-entry details').forEach((item) => {
