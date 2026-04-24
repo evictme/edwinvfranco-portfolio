@@ -1444,6 +1444,17 @@ Brings a cross-functional background spanning technical support, infrastructure,
       }, { once: true });
     });
   });
+
+  /* Floating nav: show when the hero link-stack scrolls out of view */
+  (function () {
+    var floatNav  = document.querySelector('.float-nav');
+    var linkStack = document.querySelector('.link-stack');
+    if (!floatNav || !linkStack) return;
+    var observer = new IntersectionObserver(function (entries) {
+      floatNav.classList.toggle('float-nav--visible', !entries[0].isIntersecting);
+    }, { threshold: 0 });
+    observer.observe(linkStack);
+  }());
 </script>
 
 <!-- Reference access gate -->

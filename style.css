@@ -918,3 +918,94 @@ p {
   font-size: 0.8rem;
   color: #f87171;
 }
+
+/* =================================================================
+   Floating side nav
+   Matches .secondary-link design. Hidden until .link-stack scrolls
+   out of view; JS adds .float-nav--visible via IntersectionObserver.
+   ================================================================= */
+
+.float-nav {
+  position: fixed;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(-100% - 1.5rem));
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.float-nav--visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-50%) translateX(0);
+}
+
+.float-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 3rem;
+  overflow: hidden;
+  text-decoration: none;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.88rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  transition:
+    max-width 0.26s ease,
+    gap 0.26s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.float-nav-item i {
+  flex-shrink: 0;
+  width: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.float-nav-item span {
+  opacity: 0;
+  max-width: 0;
+  transition: opacity 0.16s ease 0.06s, max-width 0.26s ease;
+  pointer-events: none;
+}
+
+/* Expand all items when hovering the nav container */
+.float-nav:hover .float-nav-item {
+  max-width: 220px;
+  gap: 10px;
+}
+
+.float-nav:hover .float-nav-item span {
+  opacity: 1;
+  max-width: 200px;
+}
+
+.float-nav:hover .float-nav-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(90, 60, 255, 0.25);
+  box-shadow:
+    0 0 12px rgba(90, 60, 255, 0.10),
+    0 0 16px rgba(0, 194, 255, 0.08);
+}
+
+/* Hide on small screens where the link-stack is always visible */
+@media (max-width: 600px) {
+  .float-nav {
+    display: none;
+  }
+}
