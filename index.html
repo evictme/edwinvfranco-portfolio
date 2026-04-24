@@ -534,6 +534,39 @@
 <body>
 <div class="ambient-glow ambient-glow-1"></div>
 <div class="ambient-glow ambient-glow-2"></div>
+
+<!-- Floating side nav -->
+<nav class="float-nav" aria-label="Quick navigation">
+  <a class="float-nav-item" href="#projects">
+    <i class="fa-solid fa-diagram-project" aria-hidden="true"></i>
+    <span>View Projects</span>
+  </a>
+  <a class="float-nav-item" href="https://github.com/evictme" target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-github" aria-hidden="true"></i>
+    <span>GitHub</span>
+  </a>
+  <a class="float-nav-item" href="https://www.linkedin.com/in/edwinvfranco" target="_blank" rel="noopener noreferrer">
+    <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
+    <span>LinkedIn</span>
+  </a>
+  <a class="float-nav-item" href="mailto:evf@edwinvfranco.com">
+    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+    <span>Email</span>
+  </a>
+  <a class="float-nav-item" href="workflow-request-demo.html" target="_blank" rel="noopener noreferrer">
+    <i class="fa-solid fa-gear" aria-hidden="true"></i>
+    <span>Workflow Demo</span>
+  </a>
+  <a class="float-nav-item" href="#recruiters">
+    <i class="fa-solid fa-handshake" aria-hidden="true"></i>
+    <span>For Recruiters</span>
+  </a>
+  <a class="float-nav-item" href="#references">
+    <i class="fa-solid fa-comments" aria-hidden="true"></i>
+    <span>References</span>
+  </a>
+</nav>
+
   <main class="page-shell">
     <section class="hero-panel panel">
       <div class="hero-top">
@@ -643,10 +676,13 @@ Brings a cross-functional background spanning technical support, infrastructure,
     <i class="fa-solid fa-envelope"></i>
     <span>evf@edwinvfranco.com</span>
   </a>
-  <a class="secondary-link" href="workflow-request-demo.html" target="_blank">View Workflow Demo</a>
+  <a class="secondary-link" href="workflow-request-demo.html" target="_blank" rel="noopener noreferrer">
+    <i class="fa-solid fa-gear"></i>
+    <span>View Workflow Demo</span>
+  </a>
 
   <a class="secondary-link" href="#recruiters">
-    <i class="fa-solid fa-user-tie"></i>
+    <i class="fa-solid fa-handshake"></i>
     <span>For Recruiters &#x2013; Download Resume</span>
   </a>
 
@@ -1156,6 +1192,20 @@ Brings a cross-functional background spanning technical support, infrastructure,
       </div>
     </div>
 
+    <!-- Career History -->
+    <div class="resume-card">
+      <h3>Career History</h3>
+      <p>Full employment history from 1993 to present, covering all roles, organizations, and contributions across my career.</p>
+      <div class="resume-btn-group">
+        <a class="resume-btn" href="assets/Edwin_Victor_Franco_CAREER_HISTORY.pdf" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-eye"></i> View
+        </a>
+        <a class="resume-btn resume-btn-dl" href="assets/Edwin_Victor_Franco_CAREER_HISTORY.pdf" download="Edwin_Victor_Franco_CAREER_HISTORY.pdf">
+          <i class="fa-solid fa-file-arrow-down"></i> Download
+        </a>
+      </div>
+    </div>
+
   </div>
 
   <!-- ── Professional References ───────────────────────── -->
@@ -1395,5 +1445,21 @@ Brings a cross-functional background spanning technical support, infrastructure,
     });
   });
 </script>
+
+<!-- Reference access gate -->
+<div id="ref-gate-overlay" class="ref-gate-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="ref-gate-heading">
+  <div class="ref-gate-box">
+    <button class="ref-gate-close" id="ref-gate-close" aria-label="Close">&#x2715;</button>
+    <h3 class="ref-gate-heading" id="ref-gate-heading"><i class="fa-solid fa-lock"></i> Access Code Required</h3>
+    <p class="ref-gate-note">Reference details are access-protected. Enter the code below to reveal names and contact information.</p>
+    <p class="ref-gate-note-sub">You may request the access code or a PDF list of references from Edwin at any time &mdash; <a href="mailto:evf@edwinvfranco.com">evf@edwinvfranco.com</a>.</p>
+    <div class="ref-gate-row">
+      <input type="password" id="ref-gate-input" placeholder="Access code" autocomplete="off" aria-label="Access code" maxlength="20" />
+      <button id="ref-gate-submit" class="ref-gate-btn">Unlock</button>
+    </div>
+    <p class="ref-gate-error" id="ref-gate-error" hidden>Incorrect code. Please try again.</p>
+  </div>
+</div>
+
 </body>
 </html>

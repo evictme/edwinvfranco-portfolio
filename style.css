@@ -635,6 +635,11 @@ p {
   gap: 0.3rem;
 }
 
+/* Ensure display:flex doesn't override the hidden attribute */
+.ref-name-list[hidden] {
+  display: none !important;
+}
+
 .ref-name-item {
   border-radius: 10px;
   overflow: hidden;
@@ -831,4 +836,85 @@ p {
   box-shadow:
     0 0 20px rgba(90, 60, 255, 0.24),
     0 0 26px rgba(0, 194, 255, 0.2);
+}
+/* =================================================================
+   Inline reference gate (access code prompt inside accordion body)
+   ================================================================= */
+
+.ref-inline-gate {
+  padding: 1.1rem 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.ref-inline-gate-icon {
+  font-size: 1rem;
+  opacity: 0.45;
+  margin-bottom: 0.1rem;
+}
+
+.ref-inline-gate-msg {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.ref-inline-gate-sub {
+  margin: 0 0 0.65rem;
+  font-size: 0.82rem;
+  color: var(--text-2, #b0b3ba);
+  opacity: 0.75;
+}
+
+.ref-inline-gate-row {
+  display: flex;
+  gap: 0.45rem;
+  width: 100%;
+}
+
+.ref-inline-gate-input {
+  flex: 1;
+  min-width: 0;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+.ref-inline-gate-input:focus {
+  border-color: rgba(90, 60, 255, 0.55);
+  background: rgba(90, 60, 255, 0.06);
+}
+
+.ref-inline-gate-btn {
+  flex-shrink: 0;
+  background: rgba(90, 60, 255, 0.18);
+  border: 1px solid rgba(90, 60, 255, 0.32);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.ref-inline-gate-btn:hover {
+  background: rgba(90, 60, 255, 0.30);
+  border-color: rgba(90, 60, 255, 0.5);
+}
+
+.ref-inline-gate-error {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: #f87171;
 }
