@@ -1,0 +1,10 @@
+{
+  "name": "Contractor Finder",
+  "short_name": "Contractors",
+  "id": "/contractors/",
+  "start_url": "/contractors/",
+  "scope": "/contractors/",
+  "display": "standalone",
+  "background_color": "#f4f4f1",
+  "theme_color": "#111111"
+}
